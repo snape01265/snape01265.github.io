@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamscape Portfolio | Game Dev</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Gaegu:wght@400;700&family=Zeyada&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-mint: #e2fdf5;
+            --border-purple: #9d8dbd;
+            --accent-pink: #fbcfe8;
+        }
+        body {
+            font-family: 'Gaegu', cursive;
+            overflow: hidden;
+            background-color: var(--bg-mint);
+            color: #4a4a4a;
+        }
+        .retro-window-border {
+            border: 4px solid var(--border-purple);
+            box-shadow: 6px 6px 0px rgba(157, 141, 189, 0.3);
+            background: white;
+        }
+        .pixel-font {
+            font-family: 'VT323', monospace;
+        }
+        .handwritten {
+            font-family: 'Zeyada', cursive;
+        }
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-left: 2px solid var(--border-purple);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-purple);
+            border-radius: 0px;
+        }
+        .desktop-pattern {
+            background-image: radial-gradient(#9d8dbd 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.2;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .float-anim {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes marquee-scroll {
+            0%   { transform: translateX(0); }
+            10%  { transform: translateX(0); }
+            90%  { transform: translateX(var(--scroll-distance)); }
+            100% { transform: translateX(var(--scroll-distance)); }
+        }
+        .marquee-container {
+            overflow: hidden;
+        }
+        .marquee-container:hover .marquee-text {
+            animation: marquee-scroll 4s ease-in-out infinite alternate;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
