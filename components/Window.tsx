@@ -32,8 +32,9 @@ const Window: React.FC<WindowProps> = ({ instance, onClose, onMinimize, onFocus,
       return { x: winW - 360, y: winH - 500 };
     }
 
-    const appW = 750;
-    const appH = 520;
+    const isAboutApp = instance.id === 'about';
+    const appW = isAboutApp ? 820 : 750;
+    const appH = isAboutApp ? 620 : 520;
     
     // 앱 아이디에 따른 약간의 엇갈림(Stagger) 효과
     const stagger = instance.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % 5;
@@ -84,8 +85,9 @@ const Window: React.FC<WindowProps> = ({ instance, onClose, onMinimize, onFocus,
     };
   }, [isDragging]);
 
-  const defaultWidth = isMusicApp ? '320px' : '750px';
-  const defaultHeight = isMusicApp ? '420px' : '420px';
+  const isAboutApp = instance.id === 'about';
+  const defaultWidth = isMusicApp ? '320px' : isAboutApp ? '820px' : '750px';
+  const defaultHeight = isMusicApp ? '420px' : isAboutApp ? '620px' : '420px';
 
   const windowStyle: React.CSSProperties = isMaximized 
     ? { top: 0, left: 0, right: 0, bottom: '56px', zIndex: instance.zIndex }

@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-export type AppId = 'notes' | 'paint' | 'music' | 'projects' | 'about' | 'resume';
+export type AppId = 'notes' | 'paint' | 'music' | 'projects' | 'about' | 'resume' | 'gallery';
 
 export interface WindowInstance {
   id: AppId;

@@ -19,6 +19,7 @@ import MusicApp from './components/apps/MusicApp';
 import ProjectApp from './components/apps/ProjectApp';
 import AboutApp from './components/apps/AboutApp';
 import ResumeApp from './components/apps/ResumeApp';
+import GalleryApp from './components/apps/GalleryApp';
 import { AppId, WindowInstance } from './types';
 
 const INITIAL_WINDOWS: WindowInstance[] = [
@@ -28,6 +29,7 @@ const INITIAL_WINDOWS: WindowInstance[] = [
   { id: 'notes', title: 'Dev Log', icon: <BookOpen size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
   { id: 'paint', title: 'Sketchbook', icon: <Palette size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
   { id: 'music', title: 'Music Player', icon: <Music size={18} />, isOpen: true, isMinimized: false, zIndex: 10 },
+  { id: 'gallery', title: 'Gallery', icon: <Palette size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
 ];
 
 const App: React.FC = () => {
@@ -64,8 +66,9 @@ const App: React.FC = () => {
       case 'paint': return <PaintApp />;
       case 'music': return <MusicApp />;
       case 'projects': return <ProjectApp />;
-      case 'about': return <AboutApp />;
+      case 'about': return <AboutApp onOpenWindow={openWindow} />;
       case 'resume': return <ResumeApp />;
+      case 'gallery': return <GalleryApp />;
       default: return null;
     }
   };
