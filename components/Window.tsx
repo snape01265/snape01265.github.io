@@ -126,6 +126,9 @@ const Window: React.FC<WindowProps> = ({ instance, onClose, onMinimize, onFocus,
             <button onClick={(e) => { e.stopPropagation(); onMinimize(); }} className="p-1 hover:bg-purple-100 rounded text-purple-400">
               <Minus size={16} strokeWidth={3} />
             </button>
+            <button onClick={(e) => { e.stopPropagation(); setIsMaximized(!isMaximized); }} className="p-1 hover:bg-purple-100 rounded text-purple-400">
+              {isMaximized ? <Square size={14} strokeWidth={3} /> : <Maximize2 size={14} strokeWidth={3} />}
+            </button>
             <button onClick={(e) => { e.stopPropagation(); onClose(); }} className="ml-1 p-1 bg-pink-100 hover:bg-pink-500 hover:text-white rounded text-pink-500 border-2 border-pink-200">
               <X size={16} strokeWidth={3} />
             </button>

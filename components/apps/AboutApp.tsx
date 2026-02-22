@@ -8,13 +8,12 @@ const AboutApp: React.FC = () => {
         <div className="flex flex-col items-center mb-10 text-center">
           <div className="w-32 h-32 rounded-full border-4 border-purple-200 p-1 mb-4">
             <img 
-              src="/profile/test.png" 
+              src="/profile/profile.JPG" 
               alt="Avatar" 
               className="w-full h-full object-cover rounded-full" 
             />
           </div>
-          <h1 className="pixel-font text-4xl font-bold text-purple-900 mb-1 uppercase">Dev Wanderer</h1>
-          <p className="text-pink-500 font-bold uppercase tracking-widest text-xs">Level 99 Game Architect</p>
+          <h1 className="pixel-font text-4xl font-bold text-purple-900 mb-1 uppercase">Gameplay Programmer</h1>
         </div>
 
         <div className="space-y-6">
