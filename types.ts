@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-export type AppId = 'notes' | 'paint' | 'music' | 'projects' | 'about' | 'resume' | 'gallery';
+export type AppId = 'paint' | 'music' | 'projects' | 'about' | 'resume' | 'gallery';
 
 export interface WindowInstance {
   id: AppId;
@@ -31,6 +31,24 @@ export interface Post {
   date: string;
 }
 
+export interface CaseStudyImage {
+  src: string;
+  caption?: string;
+}
+
+export interface CaseStudyLink {
+  label: string;
+  url: string;
+}
+
+export interface CaseStudySection {
+  heading: string;
+  body?: string;
+  bullets?: string[];
+  images?: CaseStudyImage[];
+  links?: CaseStudyLink[];
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -40,4 +58,8 @@ export interface Project {
   videoUrl?: string;
   link?: string;
   tech: string[];
+  duration?: string;
+  teamSize?: number;
+  roles?: string[];
+  caseStudy?: CaseStudySection[];
 }

@@ -50,14 +50,14 @@ const AboutApp: React.FC<AboutAppProps> = ({ onOpenWindow }) => {
                 className="flex items-center gap-1.5 text-purple-500 hover:text-purple-700 font-bold text-sm transition-colors underline underline-offset-2"
               >
                 <FileCode2 size={14} />
-                Quest Log
+                Resume
               </button>
               <button
                 onClick={() => onOpenWindow('projects')}
                 className="flex items-center gap-1.5 text-pink-500 hover:text-pink-700 font-bold text-sm transition-colors underline underline-offset-2"
               >
                 <Gamepad2 size={14} />
-                Game Shelf
+                Games
               </button>
               <button
                 onClick={() => onOpenWindow('gallery')}

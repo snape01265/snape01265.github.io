@@ -1,19 +1,18 @@
 
 import React, { useState, useCallback, useEffect } from 'react';
 import { 
-  BookOpen, 
   Palette, 
   Music, 
   Gamepad2, 
   User,
   FileCode2,
+  Image,
   Sparkles,
   Heart
 } from 'lucide-react';
 import DesktopIcon from './components/DesktopIcon';
 import Window from './components/Window';
 import Taskbar from './components/Taskbar';
-import NoteApp from './components/apps/NoteApp';
 import PaintApp from './components/apps/PaintApp';
 import MusicApp from './components/apps/MusicApp';
 import ProjectApp from './components/apps/ProjectApp';
@@ -23,13 +22,12 @@ import GalleryApp from './components/apps/GalleryApp';
 import { AppId, WindowInstance } from './types';
 
 const INITIAL_WINDOWS: WindowInstance[] = [
-  { id: 'projects', title: 'Game Shelf', icon: <Gamepad2 size={18} />, isOpen: false, isMinimized: false, zIndex: 11 },
+  { id: 'projects', title: 'Games', icon: <Gamepad2 size={18} />, isOpen: false, isMinimized: false, zIndex: 11 },
   { id: 'about', title: 'Profile', icon: <User size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
-  { id: 'resume', title: 'Quest Log', icon: <FileCode2 size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
-  { id: 'notes', title: 'Dev Log', icon: <BookOpen size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
+  { id: 'resume', title: 'Resume', icon: <FileCode2 size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
   { id: 'paint', title: 'Sketchbook', icon: <Palette size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
-  { id: 'music', title: 'Music Player', icon: <Music size={18} />, isOpen: true, isMinimized: false, zIndex: 10 },
-  { id: 'gallery', title: 'Gallery', icon: <Palette size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
+  { id: 'music', title: 'Music', icon: <Music size={18} />, isOpen: true, isMinimized: false, zIndex: 10 },
+  { id: 'gallery', title: 'Gallery', icon: <Image size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
 ];
 
 const App: React.FC = () => {
@@ -62,7 +60,6 @@ const App: React.FC = () => {
 
   const renderApp = (id: AppId) => {
     switch (id) {
-      case 'notes': return <NoteApp />;
       case 'paint': return <PaintApp />;
       case 'music': return <MusicApp />;
       case 'projects': return <ProjectApp />;
@@ -80,8 +77,8 @@ const App: React.FC = () => {
       {/* 가로로 나열되는 아이콘들 */}
       <div className="relative z-10 p-8 flex flex-wrap gap-4 items-start content-start">
         <DesktopIcon icon={<Gamepad2 size={32} />} label="Games" onClick={() => openWindow('projects')} color="text-pink-500" />
-        <DesktopIcon icon={<BookOpen size={32} />} label="DevLog" onClick={() => openWindow('notes')} color="text-emerald-500" />
-        <DesktopIcon icon={<Palette size={32} />} label="Draw" onClick={() => openWindow('paint')} color="text-orange-500" />
+        <DesktopIcon icon={<Image size={32} />} label="Gallery" onClick={() => openWindow('gallery')} color="text-emerald-500" />
+        <DesktopIcon icon={<Palette size={32} />} label="Sketchbook" onClick={() => openWindow('paint')} color="text-orange-500" />
         <DesktopIcon icon={<Music size={32} />} label="Music" onClick={() => openWindow('music')} color="text-indigo-500" />
         <DesktopIcon icon={<User size={32} />} label="Profile" onClick={() => openWindow('about')} color="text-purple-500" />
         <DesktopIcon icon={<FileCode2 size={32} />} label="Resume" onClick={() => openWindow('resume')} color="text-blue-500" />

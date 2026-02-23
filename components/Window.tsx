@@ -32,9 +32,8 @@ const Window: React.FC<WindowProps> = ({ instance, onClose, onMinimize, onFocus,
       return { x: winW - 360, y: winH - 500 };
     }
 
-    const isAboutApp = instance.id === 'about';
-    const appW = isAboutApp ? 820 : 750;
-    const appH = isAboutApp ? 620 : 520;
+    const appW = 820;
+    const appH = 620;
     
     // 앱 아이디에 따른 약간의 엇갈림(Stagger) 효과
     const stagger = instance.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % 5;
@@ -85,20 +84,15 @@ const Window: React.FC<WindowProps> = ({ instance, onClose, onMinimize, onFocus,
     };
   }, [isDragging]);
 
-  const isAboutApp = instance.id === 'about';
-  const defaultWidth = isMusicApp ? '320px' : isAboutApp ? '820px' : '750px';
-  const defaultHeight = isMusicApp ? '420px' : isAboutApp ? '620px' : '420px';
+  const defaultWidth = isMusicApp ? '320px' : '820px';
+  const defaultHeight = isMusicApp ? '420px' : '620px';
 
   const windowStyle: React.CSSProperties = isMaximized 
     ? { top: 0, left: 0, right: 0, bottom: '56px', zIndex: instance.zIndex }
     : { top: position.y, left: position.x, width: defaultWidth, height: defaultHeight, zIndex: instance.zIndex };
 
   if (instance.isMinimized) {
-    Object.assign(windowStyle, {
-      visibility: 'hidden' as const,
-      pointerEvents: 'none' as const,
-      position: 'absolute' as const,
-    });
+    windowStyle.display = 'none';
   }
 
   return (
