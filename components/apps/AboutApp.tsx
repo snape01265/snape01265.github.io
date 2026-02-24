@@ -19,6 +19,7 @@ const AboutApp: React.FC<AboutAppProps> = ({ onOpenWindow }) => {
             />
           </div>
           <h1 className="pixel-font text-4xl font-bold text-purple-900 mb-1 uppercase">Client Programmer</h1>
+          <p className="text-gray-500 font-medium mt-1">I'm Sun, a team-oriented programmer who sets the stage for compelling gameplay and memorable storytelling experiences, focused on writing clean, efficient code.</p>
         </div>
 
         <div className="space-y-6">
@@ -28,7 +29,7 @@ const AboutApp: React.FC<AboutAppProps> = ({ onOpenWindow }) => {
               All My Life
             </h3>
             <p className="text-gray-600 leading-relaxed font-medium">
-              Hello! If you have stumbled onto this page on purpose, I figure I owe you a proper introduction. 
+              Hello! If you have stumbled onto this page, I figure I owe you a proper introduction. 
             </p>
             <p className="text-gray-600 leading-relaxed font-medium mt-3">
               I'm Sun and as the title above suggests, I make games for a living. 
@@ -80,20 +81,20 @@ const AboutApp: React.FC<AboutAppProps> = ({ onOpenWindow }) => {
                 <p className="text-gray-500 text-m leading-relaxed">
                   Experienced working alongside designers, artists, and other programmers 
                   in teams scaling up to 30 members. I enjoy other's company and working together.
-                  It naturally pushes me to be a better coworker and helps me stay busy. 
+                  It naturally pushes me to be a better person and helps me stay busy. 
                   Great ideas come from casual conversations afterall!
                 </p>
               </div>
               <div className="flex flex-col items-center text-center">
-                <h4 className="font-bold text-purple-900 mb-1 text-lg">I enjoy learning and trying</h4>
+                <h4 className="font-bold text-purple-900 mb-1 text-lg">I enjoy learning new concepts</h4>
                 <p className="text-gray-500 text-m leading-relaxed">
-                  While I hone my skills as a programmer, I'm always looking for new challenges and opportunities to learn.
-                  I thrive in difficult challenges and learn best when I'm pushed out of my comfort zone. 
+                  While I hone my skills as a programmer, I'm always looking for opportunities to learn.
+                  I thrive when I tackle difficult challenges and learn best when I'm pushed out of my comfort zone. 
                   Client Programming is my strong suit, but I am not afraid to try my hand at other things if the situation calls for it.
                 </p>
               </div>
               <div className="flex flex-col items-center text-center">
-                <h4 className="font-bold text-purple-900 mb-1 text-lg">Logic and reasoning</h4>
+                <h4 className="font-bold text-purple-900 mb-1 text-lg">Proactive, inquisitive spirit</h4>
                 <p className="text-gray-500 text-m leading-relaxed">
                   I like to understand the logic and reasoning behind everything.
                   If I create a tool, it is because I notice a problem that needs to be addressed.
@@ -118,6 +119,9 @@ const AboutApp: React.FC<AboutAppProps> = ({ onOpenWindow }) => {
               </span>
               <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-sm font-bold border border-slate-200">
                 C++
+              </span>
+              <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-sm font-bold border border-slate-200">
+                Python
               </span>
               <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-sm font-bold border border-slate-200">
                 SVN

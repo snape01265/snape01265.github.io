@@ -41,11 +41,17 @@ export interface CaseStudyLink {
   url: string;
 }
 
+export interface CaseStudyVideo {
+  src: string;
+  caption?: string;
+}
+
 export interface CaseStudySection {
   heading: string;
   body?: string;
   bullets?: string[];
   images?: CaseStudyImage[];
+  videos?: CaseStudyVideo[];
   links?: CaseStudyLink[];
 }
 
@@ -60,6 +66,8 @@ export interface Project {
   tech: string[];
   duration?: string;
   teamSize?: number;
+  teamSizeLabel?: string;
   roles?: string[];
+  platforms?: string[];
   caseStudy?: CaseStudySection[];
 }
