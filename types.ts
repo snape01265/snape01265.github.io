@@ -46,6 +46,14 @@ export interface CaseStudyVideo {
   caption?: string;
 }
 
+export interface CaseStudySubsection {
+  title: string;
+  body?: string;
+  bullets?: string[];
+  images?: CaseStudyImage[];
+  videos?: CaseStudyVideo[];
+}
+
 export interface CaseStudySection {
   heading: string;
   body?: string;
@@ -53,6 +61,7 @@ export interface CaseStudySection {
   images?: CaseStudyImage[];
   videos?: CaseStudyVideo[];
   links?: CaseStudyLink[];
+  subsections?: CaseStudySubsection[];
 }
 
 export interface Project {

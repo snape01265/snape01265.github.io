@@ -28,23 +28,58 @@ const PROJECTS: Project[] = [
       },
       {
         heading: 'Gameplay Mechanics',
-        body: '',
-        videos: [{ src: '/games/my-little-puppy/video01.mp4' }],
-      },
-      {
-        heading: 'Tools and Systems',
-        body: 'Due to project requirements and personal preference of our CTO, most of the tools and systems for our game was built from scratch. While many advanced tools like Light Baker, Terrain Editor, and Custom Animator were done by our CTO, I still had some foothold in the development of many tools and systems that would be used throughout the entire development period.',
-        videos: [{ src: '/games/my-little-puppy/video02.mp4' }],
-      },
-      {
-        heading: 'Features',
+        body: 'Responsibilities include:',
         bullets: [
-          'Built gameplay systems/tools for designers to author content',
-          'Development of UI, Animation, AI, Graphics, 3Cs, Audio, Asset Management',
-          'Utilized CI tools (Jenkins, NintendoSDK) to streamline deployment/profiling on Steam and Switch',
-          'Rebalanced gameplay difficulty while maintaining consistent experience across devices (Switch, PS5, LG TV)',
-          'Implemented TRCs for Switch and PS5',
-          'Assisted optimizing the base game to meet hardware specs for Switch',
+            'Complete additional gameplay implementation tasks',
+            'Collaborate with others to implement 3Cs, specifically tuned for a \'dog-like\' feel',
+            'Collaborate with others to implement core system mechanics',
+            'Implement event system that would be utilized throughout the entire game',
+            'Implement in-game and out-game UI with art and design departments for gameplay systems and menu',
+            'Implement cross-platform input manager',
+            'Collaborate with outsource sound designers to implement audio solutions',
+            'A lot of refactoring'
+        ]
+      },
+      {
+        heading: 'Tools',
+        body: 'Due to project requirements and personal preference of our CTO, most of the tools and systems for our game was built from scratch. While many advanced tools like Light Baker, Terrain Editor, and Custom Animator were done by our CTO, I still had some foothold in the development of many tools and systems that would be used throughout the entire development period.',
+        bullets: [
+            'General gameplay editor tools',
+            'Built core system editor tools',
+            'Built visual scripting tool for the core event system',
+            'Art asset management/search tool',
+        ],
+      },
+      {
+        heading: 'Interesting Problems',
+        subsections: [
+          {
+            title: 'Barista System',
+            body: 'Early in the project, every narrative sequence was hard-coded, including repetitive tasks like triggering animations at certain timings. But as the project progressed, we realized that these tasks were becoming bottlenecks for the sequences that the designers had envisioned.',
+          },
+          {
+            title: '',
+            body: 'Instead of programmers trying to figure out the details for that scene\'s narrative sequences, I built a system and an editor tool that gave designers (and everybody else) the authority to author events themselves. This drastically sped up our pipeline, enabling all members to test and iterate on multiple ideas without waiting on a programmer.',
+          },
+          {
+            title: '',
+            body: 'What started as a simple tool for narrative sequences quickly scaled into the backbone of our game\'s logic. We expanded Barista for use in cutscenes, trigger events, checkpoint progression, and more. Ultimately, it became an essential framework that powered nearly every scripted event in My Little Puppy, streamlining our entire development pipeline.',
+            videos: [{ src: '/games/my-little-puppy/video01.mp4' }],
+          },
+          {
+            title: 'Cross-Platform Input',
+            body: 'To support our release across PC, PS5, and Nintendo Switch, I built an abstraction layer over Unity\'s Input System. The "OmniInput" system handles seamless device switching and key/pad remapping. It features a dynamic sprite mapper that automatically translates raw inputs into platform-specific key sprites. This ensured console certification compliance and allowed designers to write text in Baristas without worrying about the active hardware. All the UIs (in-game, menu, settings, etc...) would be affected by this system.',
+            videos: [{ src: '/games/my-little-puppy/video02.mp4'}]
+          },
+          {
+            title: 'Porting to different platforms',
+            bullets: [
+              'Utilized CI tools (Jenkins, NintendoSDK) to streamline deployment/profiling on Steam and Switch',
+              'Rebalanced gameplay difficulty while maintaining consistent experience across devices (Switch, PS5, LG TV)',
+              'Implemented and followed TRCs for Switch and PS5',
+              'Assisted optimizing the base game to meet hardware specs for Switch',
+            ],
+          },
         ],
       },
       {
@@ -91,12 +126,12 @@ const PROJECTS: Project[] = [
         ],
       },
       {
-        heading: 'Takeaways',
-        body: 'I would not say I have learned a whole lot about programming from this project. It was all entry level knowledge about game development and programming, like movement, camera, interactions, and vector math. Overall, this project helped me understand Unity and C# better over anything else. This introductory project showed me what game development is like and how to work with a team. Also, it was a great learning experience for me to understand what it takes to ship a game from start to finish, and made me realize how much I am lacking in the technical side of things.',
-      },
-      {
         heading: 'Interesting Probelms',
         body: 'Hmm... Literally everything was a new challenge for me as I had 0 programming knowledge prior to this project. Even using an IDE was a challenge for me. So, I would say there were no technical challenges, but more like a learning experience. Creating progression system and customizing Dialogue System was a bit challenging though😭',
+      },
+      {
+        heading: 'Takeaways',
+        body: 'I would not say I have learned a whole lot about programming from this project. It was all entry level knowledge about game development and programming, like movement, camera, interactions, and vector math. Overall, this project helped me understand Unity and C# better over anything else. This introductory project showed me what game development is like and how to work with a team. Also, it was a great learning experience for me to understand what it takes to ship a game from start to finish, and made me realize how much I am lacking in the technical side of things.',
       },
     ],
   },
@@ -297,6 +332,62 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ project, onBack }) => {
                       </figcaption>
                     )}
                   </figure>
+                ))}
+              </div>
+            )}
+
+            {section.subsections && section.subsections.length > 0 && (
+              <div className="flex flex-col gap-5 mt-4">
+                {section.subsections.map((sub, j) => (
+                  <div key={j} className="pl-4 border-l-4 border-purple-100">
+                    <h4 className="text-lg font-bold text-purple-700 mb-2">{sub.title}</h4>
+                    {sub.body && (
+                      <p className="text-gray-600 leading-relaxed font-medium mb-2">{sub.body}</p>
+                    )}
+                    {sub.bullets && sub.bullets.length > 0 && (
+                      <ul className="list-disc list-inside space-y-1 text-gray-600 font-medium ml-2 mb-2">
+                        {sub.bullets.map((item, k) => (
+                          <li key={k}>{item}</li>
+                        ))}
+                      </ul>
+                    )}
+                    {sub.images && sub.images.length > 0 && (
+                      <div className={`grid gap-4 mb-2 ${sub.images.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                        {sub.images.map((img, k) => (
+                          <figure key={k} className="rounded-xl overflow-hidden border-2 border-purple-100">
+                            <img src={img.src} alt={img.caption || ''} className="w-full h-auto object-cover" />
+                            {img.caption && (
+                              <figcaption className="px-3 py-2 text-xs text-gray-400 italic font-medium bg-purple-50/50">
+                                {img.caption}
+                              </figcaption>
+                            )}
+                          </figure>
+                        ))}
+                      </div>
+                    )}
+                    {sub.videos && sub.videos.length > 0 && (
+                      <div className="flex flex-col gap-4 mb-2">
+                        {sub.videos.map((vid, k) => (
+                          <figure key={k} className="rounded-xl overflow-hidden border-2 border-purple-100">
+                            <video
+                              src={vid.src}
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              className="w-full h-auto"
+                              onClick={(e) => e.preventDefault()}
+                            />
+                            {vid.caption && (
+                              <figcaption className="px-3 py-2 text-xs text-gray-400 italic font-medium bg-purple-50/50">
+                                {vid.caption}
+                              </figcaption>
+                            )}
+                          </figure>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             )}

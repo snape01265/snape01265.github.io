@@ -1,5 +1,5 @@
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { X, Minus, Square, Maximize2 } from 'lucide-react';
 
 interface WindowProps {
@@ -17,10 +17,15 @@ interface WindowProps {
   children: React.ReactNode;
 }
 
+const CASCADE_STEP_X = 30;
+const CASCADE_STEP_Y = 25;
+const MAX_CASCADE_STEPS = 8;
+const OVERLAP_THRESHOLD = 20;
+const openWindowPositions: { id: string; x: number; y: number }[] = [];
+
 const Window: React.FC<WindowProps> = ({ instance, onClose, onMinimize, onFocus, children }) => {
   const isMusicApp = instance.id === 'music';
   
-  // 초기 위치 계산 함수를 State 이니셜라이저에서 직접 호출하여 Flicker 방지
   const [position, setPosition] = useState(() => {
     if (typeof window === 'undefined') return { x: 100, y: 100 };
     
@@ -28,23 +33,51 @@ const Window: React.FC<WindowProps> = ({ instance, onClose, onMinimize, onFocus,
     const winH = window.innerHeight;
 
     if (instance.id === 'music') {
-      // 음악 앱은 화면 우측 하단 쪽에 배치
       return { x: winW - 360, y: winH - 500 };
     }
 
     const appW = 820;
     const appH = 620;
     
-    // 앱 아이디에 따른 약간의 엇갈림(Stagger) 효과
-    const stagger = instance.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % 5;
-    const offsetX = stagger * 30;
-    const offsetY = stagger * 25;
+    const baseX = Math.max(20, (winW - appW) / 2);
+    const baseY = Math.max(20, (winH - appH) / 2 - 30);
     
-    const centerX = Math.max(20, (winW - appW) / 2) + offsetX;
-    const centerY = Math.max(20, (winH - appH) / 2 - 30) + offsetY;
-    
-    return { x: centerX, y: centerY };
+    return { x: baseX, y: baseY };
   });
+
+  useLayoutEffect(() => {
+    if (isMusicApp) return;
+
+    let posX = position.x;
+    let posY = position.y;
+    let moved = false;
+
+    for (let step = 0; step < MAX_CASCADE_STEPS; step++) {
+      const overlapping = openWindowPositions.some(
+        (entry) => entry.id !== instance.id &&
+          Math.abs(entry.x - posX) < OVERLAP_THRESHOLD &&
+          Math.abs(entry.y - posY) < OVERLAP_THRESHOLD
+      );
+      if (!overlapping) break;
+      posX += CASCADE_STEP_X;
+      posY += CASCADE_STEP_Y;
+      moved = true;
+    }
+
+    const existing = openWindowPositions.findIndex((e) => e.id === instance.id);
+    if (existing !== -1) {
+      openWindowPositions[existing] = { id: instance.id, x: posX, y: posY };
+    } else {
+      openWindowPositions.push({ id: instance.id, x: posX, y: posY });
+    }
+
+    if (moved) setPosition({ x: posX, y: posY });
+
+    return () => {
+      const idx = openWindowPositions.findIndex((e) => e.id === instance.id);
+      if (idx !== -1) openWindowPositions.splice(idx, 1);
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const [isDragging, setIsDragging] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);

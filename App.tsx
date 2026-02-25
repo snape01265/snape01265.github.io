@@ -23,7 +23,7 @@ import { AppId, WindowInstance } from './types';
 
 const INITIAL_WINDOWS: WindowInstance[] = [
   { id: 'projects', title: 'Games', icon: <Gamepad2 size={18} />, isOpen: false, isMinimized: false, zIndex: 11 },
-  { id: 'about', title: 'Profile', icon: <User size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
+  { id: 'about', title: 'Profile', icon: <User size={18} />, isOpen: true, isMinimized: false, zIndex: 12 },
   { id: 'resume', title: 'Resume', icon: <FileCode2 size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
   { id: 'paint', title: 'Sketchbook', icon: <Palette size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
   { id: 'music', title: 'Music', icon: <Music size={18} />, isOpen: true, isMinimized: false, zIndex: 10 },
