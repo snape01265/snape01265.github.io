@@ -218,7 +218,7 @@ interface CaseStudyViewProps {
 
 const CaseStudyView: React.FC<CaseStudyViewProps> = ({ project, onBack }) => {
   return (
-    <div className="h-full bg-white overflow-y-auto relative">
+    <div className="h-full bg-white overflow-y-auto relative pb-20">
       <button
         onClick={onBack}
         className="sticky top-4 left-4 z-10 ml-4 flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm text-purple-700 rounded-xl font-bold text-sm hover:bg-white transition-all shadow-md"
@@ -444,7 +444,7 @@ const ProjectApp: React.FC = () => {
   }
 
   return (
-    <div style={PROJECT_FONT} className="p-6 h-full bg-[#fdf2f8]/50 overflow-y-auto">
+    <div style={PROJECT_FONT} className="p-6 pb-20 h-full bg-[#fdf2f8]/50 overflow-y-auto">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center gap-3 mb-8">
           <Gamepad className="text-pink-500" size={32} />

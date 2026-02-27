@@ -72,7 +72,7 @@ const GalleryApp: React.FC = () => {
   let globalIndex = 0;
 
   return (
-    <div className="p-8 h-full bg-slate-950 overflow-y-auto">
+    <div className="p-8 pb-20 h-full bg-slate-950 overflow-y-auto">
       <div className="max-w-6xl mx-auto">
         <header className="mb-10">
           <h2 className="text-4xl font-bold text-white tracking-tight mb-2">Gallery</h2>

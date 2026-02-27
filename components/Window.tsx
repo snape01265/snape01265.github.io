@@ -23,9 +23,25 @@ const MAX_CASCADE_STEPS = 8;
 const OVERLAP_THRESHOLD = 20;
 const openWindowPositions: { id: string; x: number; y: number }[] = [];
 
+const MOBILE_BREAKPOINT = 768;
+
 const Window: React.FC<WindowProps> = ({ instance, onClose, onMinimize, onFocus, children }) => {
   const isMusicApp = instance.id === 'music';
-  
+
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < MOBILE_BREAKPOINT;
+      setIsMobile(mobile);
+      if (mobile) setIsMaximized(true);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const [position, setPosition] = useState(() => {
     if (typeof window === 'undefined') return { x: 100, y: 100 };
     
@@ -80,12 +96,12 @@ const Window: React.FC<WindowProps> = ({ instance, onClose, onMinimize, onFocus,
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const [isDragging, setIsDragging] = useState(false);
-  const [isMaximized, setIsMaximized] = useState(false);
+  const [isMaximized, setIsMaximized] = useState(isMobile);
   const [showClose, setShowClose] = useState(false);
   const dragRef = useRef<{ startX: number; startY: number; startPosX: number; startPosY: number } | null>(null);
 
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (isMaximized) return;
+    if (isMaximized || isMobile) return;
     onFocus();
     setIsDragging(true);
     dragRef.current = {
@@ -143,7 +159,7 @@ const Window: React.FC<WindowProps> = ({ instance, onClose, onMinimize, onFocus,
         <div 
           className="flex items-center justify-between px-3 py-2 bg-[#fdf2f8] border-b-4 border-purple-200 cursor-move select-none"
           onMouseDown={handleMouseDown}
-          onDoubleClick={() => setIsMaximized(!isMaximized)}
+          onDoubleClick={() => !isMobile && setIsMaximized(!isMaximized)}
         >
           <div className="flex items-center gap-2">
             <div className="scale-90 flex items-center justify-center text-purple-500">
@@ -155,9 +171,11 @@ const Window: React.FC<WindowProps> = ({ instance, onClose, onMinimize, onFocus,
             <button onClick={(e) => { e.stopPropagation(); onMinimize(); }} className="p-1 hover:bg-purple-100 rounded text-purple-400">
               <Minus size={16} strokeWidth={3} />
             </button>
-            <button onClick={(e) => { e.stopPropagation(); setIsMaximized(!isMaximized); }} className="p-1 hover:bg-purple-100 rounded text-purple-400">
-              {isMaximized ? <Square size={14} strokeWidth={3} /> : <Maximize2 size={14} strokeWidth={3} />}
-            </button>
+            {!isMobile && (
+              <button onClick={(e) => { e.stopPropagation(); setIsMaximized(!isMaximized); }} className="p-1 hover:bg-purple-100 rounded text-purple-400">
+                {isMaximized ? <Square size={14} strokeWidth={3} /> : <Maximize2 size={14} strokeWidth={3} />}
+              </button>
+            )}
             <button onClick={(e) => { e.stopPropagation(); onClose(); }} className="ml-1 p-1 bg-pink-100 hover:bg-pink-500 hover:text-white rounded text-pink-500 border-2 border-pink-200">
               <X size={16} strokeWidth={3} />
             </button>

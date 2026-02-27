@@ -12,7 +12,7 @@ const DesktopIcon: React.FC<DesktopIconProps> = ({ icon, customIcon, label, onCl
   return (
     <button 
       onClick={onClick}
-      className="group flex flex-col items-center gap-1 p-2 transition-all w-24"
+      className="group flex flex-col items-center gap-1 p-2 transition-all w-24 pointer-events-auto"
     >
       <div className={`relative p-4 bg-white/60 backdrop-blur-sm rounded-2xl border-2 border-white group-hover:border-purple-300 group-hover:bg-white shadow-sm transition-all group-hover:-translate-y-1 ${color}`}>
         {customIcon ? (

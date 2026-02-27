@@ -13,6 +13,14 @@ export interface WindowInstance {
   customIcon?: string;
 }
 
+export interface PostIt {
+  id: string;
+  imageDataUrl: string;
+  x: number;
+  y: number;
+  rotation: number;
+}
+
 export interface Song {
   id: string;
   title: string;

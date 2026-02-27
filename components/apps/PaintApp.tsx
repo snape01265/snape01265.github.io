@@ -1,10 +1,15 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { Pencil, Eraser, Download, Trash2, Circle } from 'lucide-react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { Pencil, Eraser, Download, Trash2, StickyNote } from 'lucide-react';
 
 const COLORS = ['#ef4444', '#fbcfe8', '#e9d5ff', '#22c55e', '#06b6d4', '#3b82f6', '#9d8dbd', '#f472b6', '#ffffff', '#000000'];
 
-const PaintApp: React.FC = () => {
+interface PaintAppProps {
+  onCreatePostIt?: (dataUrl: string) => void;
+}
+
+const PaintApp: React.FC<PaintAppProps> = ({ onCreatePostIt }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [color, setColor] = useState('#9d8dbd');
   const [brushSize, setBrushSize] = useState(5);
@@ -12,16 +17,29 @@ const PaintApp: React.FC = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    ctx.lineJoin = 'round';
-    ctx.lineCap = 'round';
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const resizeCanvas = () => {
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+      canvas.width = container.clientWidth;
+      canvas.height = container.clientHeight;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.putImageData(imageData, 0, 0);
+    };
+
+    resizeCanvas();
+
+    const observer = new ResizeObserver(resizeCanvas);
+    observer.observe(container);
+    return () => observer.disconnect();
   }, []);
 
   const startDrawing = (e: React.MouseEvent | React.TouchEvent) => {
@@ -116,10 +134,69 @@ const PaintApp: React.FC = () => {
           <button onClick={downloadImage} className="p-2 text-purple-400 hover:bg-purple-50 rounded-lg transition-all">
             <Download size={18} />
           </button>
+          {onCreatePostIt && (
+            <button
+              onClick={() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return;
+
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const { data, width, height } = imageData;
+
+                let minX = width, minY = height, maxX = 0, maxY = 0;
+                let hasContent = false;
+
+                for (let y = 0; y < height; y++) {
+                  for (let x = 0; x < width; x++) {
+                    const i = (y * width + x) * 4;
+                    if (data[i] !== 255 || data[i + 1] !== 255 || data[i + 2] !== 255) {
+                      hasContent = true;
+                      if (x < minX) minX = x;
+                      if (x > maxX) maxX = x;
+                      if (y < minY) minY = y;
+                      if (y > maxY) maxY = y;
+                    }
+                  }
+                }
+
+                if (!hasContent) return;
+
+                const PADDING = 5;
+                const contentW = maxX - minX + 1;
+                const contentH = maxY - minY + 1;
+                const side = Math.max(contentW, contentH) + PADDING * 2;
+
+                const cropCanvas = document.createElement('canvas');
+                cropCanvas.width = side;
+                cropCanvas.height = side;
+                const cropCtx = cropCanvas.getContext('2d');
+                if (!cropCtx) return;
+
+                cropCtx.fillStyle = '#ffffff';
+                cropCtx.fillRect(0, 0, side, side);
+
+                const offsetX = (side - contentW) / 2;
+                const offsetY = (side - contentH) / 2;
+                cropCtx.drawImage(
+                  canvas,
+                  minX, minY, contentW, contentH,
+                  offsetX, offsetY, contentW, contentH
+                );
+
+                onCreatePostIt(cropCanvas.toDataURL('image/jpeg', 0.7));
+              }}
+              className="p-2 text-yellow-500 hover:bg-yellow-50 rounded-lg transition-all"
+              title="Create Post-it"
+            >
+              <StickyNote size={18} />
+            </button>
+          )}
         </div>
       </div>
 
-      <div className="flex-1 relative overflow-hidden bg-white cursor-crosshair">
+      <div ref={containerRef} className="flex-1 relative overflow-hidden bg-white cursor-crosshair">
         <canvas
           ref={canvasRef}
           onMouseDown={startDrawing}

@@ -8,7 +8,7 @@ interface AboutAppProps {
 
 const AboutApp: React.FC<AboutAppProps> = ({ onOpenWindow }) => {
   return (
-    <div className="h-full bg-white p-8 overflow-y-auto">
+    <div className="h-full bg-white p-8 pb-20 overflow-y-auto">
         <div className="max-w-3xl mx-auto">
         <div className="flex flex-col items-center mb-10 text-center">
           <div className="w-32 h-32 rounded-full border-4 border-purple-200 p-1 mb-4">

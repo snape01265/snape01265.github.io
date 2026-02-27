@@ -19,7 +19,8 @@ import ProjectApp from './components/apps/ProjectApp';
 import AboutApp from './components/apps/AboutApp';
 import ResumeApp from './components/apps/ResumeApp';
 import GalleryApp from './components/apps/GalleryApp';
-import { AppId, WindowInstance } from './types';
+import { AppId, WindowInstance, PostIt } from './types';
+import PostItNote from './components/PostItNote';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 
@@ -32,9 +33,46 @@ const INITIAL_WINDOWS: WindowInstance[] = [
   { id: 'gallery', title: 'Gallery', icon: <Image size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
 ];
 
+const POSTIT_STORAGE_KEY = 'desktop-postits';
+
+const loadPostIts = (): PostIt[] => {
+  try {
+    const stored = localStorage.getItem(POSTIT_STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+};
+
 const App: React.FC = () => {
   const [windows, setWindows] = useState<WindowInstance[]>(INITIAL_WINDOWS);
   const [topZ, setTopZ] = useState(30);
+  const [postIts, setPostIts] = useState<PostIt[]>(loadPostIts);
+
+  useEffect(() => {
+    localStorage.setItem(POSTIT_STORAGE_KEY, JSON.stringify(postIts));
+  }, [postIts]);
+
+  const addPostIt = useCallback((imageDataUrl: string) => {
+    const x = 100 + Math.random() * (window.innerWidth - 300);
+    const y = 150 + Math.random() * (window.innerHeight - 400);
+    const newPostIt: PostIt = {
+      id: Date.now().toString(),
+      imageDataUrl,
+      x: Math.max(20, Math.min(x, window.innerWidth - 140)),
+      y: Math.max(80, Math.min(y, window.innerHeight - 200)),
+      rotation: (Math.random() - 0.5) * 12,
+    };
+    setPostIts(prev => [...prev, newPostIt]);
+  }, []);
+
+  const removePostIt = useCallback((id: string) => {
+    setPostIts(prev => prev.filter(p => p.id !== id));
+  }, []);
+
+  const movePostIt = useCallback((id: string, x: number, y: number) => {
+    setPostIts(prev => prev.map(p => p.id === id ? { ...p, x, y } : p));
+  }, []);
 
   const openWindow = useCallback((id: AppId) => {
     setWindows(prev => prev.map(w => {
@@ -62,7 +100,7 @@ const App: React.FC = () => {
 
   const renderApp = (id: AppId) => {
     switch (id) {
-      case 'paint': return <PaintApp />;
+      case 'paint': return <PaintApp onCreatePostIt={addPostIt} />;
       case 'music': return <MusicApp />;
       case 'projects': return <ProjectApp />;
       case 'about': return <AboutApp onOpenWindow={openWindow} />;
@@ -75,9 +113,16 @@ const App: React.FC = () => {
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-[#e2fdf5]">
       <div className="absolute inset-0 desktop-pattern z-0" />
-      
+
+      {/* Post-it notes on the desktop */}
+      <div className="absolute inset-0 z-[5] pointer-events-none">
+        {postIts.map(p => (
+          <PostItNote key={p.id} postIt={p} onDelete={removePostIt} onMove={movePostIt} />
+        ))}
+      </div>
+
       {/* 가로로 나열되는 아이콘들 */}
-      <div className="relative z-10 p-8 flex flex-wrap gap-4 items-start content-start">
+      <div className="relative z-10 p-8 flex flex-wrap gap-4 items-start content-start pointer-events-none">
         <DesktopIcon icon={<Gamepad2 size={32} />} label="Games" onClick={() => openWindow('projects')} color="text-pink-500" />
         <DesktopIcon icon={<Image size={32} />} label="Gallery" onClick={() => openWindow('gallery')} color="text-emerald-500" />
         <DesktopIcon icon={<Music size={32} />} label="Music" onClick={() => openWindow('music')} color="text-indigo-500" />
