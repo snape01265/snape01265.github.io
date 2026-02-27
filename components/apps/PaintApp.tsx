@@ -174,9 +174,6 @@ const PaintApp: React.FC<PaintAppProps> = ({ onCreatePostIt }) => {
                 const cropCtx = cropCanvas.getContext('2d');
                 if (!cropCtx) return;
 
-                cropCtx.fillStyle = '#ffffff';
-                cropCtx.fillRect(0, 0, side, side);
-
                 const offsetX = (side - contentW) / 2;
                 const offsetY = (side - contentH) / 2;
                 cropCtx.drawImage(
@@ -185,7 +182,17 @@ const PaintApp: React.FC<PaintAppProps> = ({ onCreatePostIt }) => {
                   offsetX, offsetY, contentW, contentH
                 );
 
-                onCreatePostIt(cropCanvas.toDataURL('image/jpeg', 0.7));
+                const cropData = cropCtx.getImageData(0, 0, side, side);
+                const pixels = cropData.data;
+                const WHITE_THRESHOLD = 248;
+                for (let i = 0; i < pixels.length; i += 4) {
+                  if (pixels[i] >= WHITE_THRESHOLD && pixels[i + 1] >= WHITE_THRESHOLD && pixels[i + 2] >= WHITE_THRESHOLD) {
+                    pixels[i + 3] = 0;
+                  }
+                }
+                cropCtx.putImageData(cropData, 0, 0);
+
+                onCreatePostIt(cropCanvas.toDataURL('image/png'));
               }}
               className="p-2 text-yellow-500 hover:bg-yellow-50 rounded-lg transition-all"
               title="Create Post-it"

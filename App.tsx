@@ -35,13 +35,36 @@ const INITIAL_WINDOWS: WindowInstance[] = [
 
 const POSTIT_STORAGE_KEY = 'desktop-postits';
 
+const DEFAULT_SUN_POSTIT: PostIt = {
+  id: 'default-sun',
+  imageDataUrl: '/background/default-postit.png',
+  x: 30,
+  y: 300,
+  rotation: -3,
+};
+
+const SUN_DISMISSED_KEY = 'postit-sun-dismissed';
+
 const loadPostIts = (): PostIt[] => {
+  let postIts: PostIt[] = [];
   try {
     const stored = localStorage.getItem(POSTIT_STORAGE_KEY);
-    return stored ? JSON.parse(stored) : [];
-  } catch {
-    return [];
+    if (stored) postIts = JSON.parse(stored);
+  } catch { /* ignore */ }
+
+  const hasSun = postIts.some(p => p.id === 'default-sun');
+  const isEmpty = postIts.length === 0;
+  const sunDismissed = localStorage.getItem(SUN_DISMISSED_KEY) === 'true';
+
+  if (!hasSun && (isEmpty || !sunDismissed)) {
+    postIts = [{ ...DEFAULT_SUN_POSTIT }, ...postIts];
   }
+
+  if (isEmpty) {
+    localStorage.removeItem(SUN_DISMISSED_KEY);
+  }
+
+  return postIts;
 };
 
 const App: React.FC = () => {
@@ -67,6 +90,9 @@ const App: React.FC = () => {
   }, []);
 
   const removePostIt = useCallback((id: string) => {
+    if (id === 'default-sun') {
+      localStorage.setItem(SUN_DISMISSED_KEY, 'true');
+    }
     setPostIts(prev => prev.filter(p => p.id !== id));
   }, []);
 
