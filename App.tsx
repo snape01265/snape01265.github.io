@@ -21,6 +21,7 @@ import ResumeApp from './components/apps/ResumeApp';
 import GalleryApp from './components/apps/GalleryApp';
 import { AppId, WindowInstance } from './types';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const INITIAL_WINDOWS: WindowInstance[] = [
   { id: 'projects', title: 'Games', icon: <Gamepad2 size={18} />, isOpen: false, isMinimized: false, zIndex: 11 },
@@ -105,6 +106,7 @@ const App: React.FC = () => {
 
       <Taskbar windows={windows} onIconClick={focusWindow} onClose={closeWindow} />
       <Analytics />
+      <SpeedInsights />
     </div>
   );
 };
