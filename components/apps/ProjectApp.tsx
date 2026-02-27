@@ -37,7 +37,7 @@ const PROJECTS: Project[] = [
             'Implement in-game and out-game UI with art and design departments for gameplay systems and menu',
             'Implement cross-platform input manager',
             'Collaborate with outsource sound designers to implement audio solutions',
-            'A lot of refactoring'
+            'A lot of refactoring, debugging, and polishing'
         ]
       },
       {
@@ -63,28 +63,40 @@ const PROJECTS: Project[] = [
           },
           {
             title: '',
-            body: 'What started as a simple tool for narrative sequences quickly scaled into the backbone of our game\'s logic. We expanded Barista for use in cutscenes, trigger events, checkpoint progression, and more. Ultimately, it became an essential framework that powered nearly every scripted event in My Little Puppy, streamlining our entire development pipeline.',
+            body: 'What started as a simple tool for narrative sequences quickly scaled into the backbone of our game\'s logic. We expanded Barista for use in cutscenes, trigger events, checkpoint progression, and more. Ultimately, it became an essential framework that powered nearly every scripted event in MLP, streamlining our entire development pipeline.',
             videos: [{ src: '/games/my-little-puppy/video01.mp4' }],
           },
           {
-            title: 'Cross-Platform Input',
-            body: 'To support our release across PC, PS5, and Nintendo Switch, I built an abstraction layer over Unity\'s Input System. The "OmniInput" system handles seamless device switching and key/pad remapping. It features a dynamic sprite mapper that automatically translates raw inputs into platform-specific key sprites. This ensured console certification compliance and allowed designers to write text in Baristas without worrying about the active hardware. All the UIs (in-game, menu, settings, etc...) would be affected by this system.',
-            videos: [{ src: '/games/my-little-puppy/video02.mp4'}]
+            title: 'Cross-Platform Input System',
+            body: 'To support our release across PC, PS5, and Nintendo Switch, I built an abstraction layer over Unity\'s Input System.',
           },
           {
-            title: 'Porting to different platforms',
-            bullets: [
-              'Utilized CI tools (Jenkins, NintendoSDK) to streamline deployment/profiling on Steam and Switch',
-              'Rebalanced gameplay difficulty while maintaining consistent experience across devices (Switch, PS5, LG TV)',
-              'Implemented and followed TRCs for Switch and PS5',
-              'Assisted optimizing the base game to meet hardware specs for Switch',
-            ],
+            title: '',
+            body: 'The "OmniInput" system handles seamless device switching and key/pad remapping. It features a dynamic sprite mapper that automatically translates raw inputs into platform-specific key sprites. This ensured console compliance and allowed designers to write text in Baristas without worrying about the active hardware. All the UIs (in-game, menu, settings, etc...) would be affected by this system.',
+            videos: [{ src: '/games/my-little-puppy/video02.mp4' }]
           },
+          {
+            title: 'Porting to different platforms & Optimization',
+            body: 'Bringing MLP to the Nintendo Switch, PS5, and LG TV introduced strict hardware constraints that required aggressive optimization. No but really, why is the Switch so low in memory and specs...😭 I have gained a lot of respect for all console games. Older games on consoles were really using black magics to run the game so seemlessly.',
+          },
+          {
+            title: '',
+            body: 'For the Nintendo Switch, I built a streamlined profiling system and helped optimizing the base game, ensuring we maintained a stable framerate without sacrificing the game\'s visual aesthetic. This was a great opportunity for me to learn all kinds of optimization techniques.',
+            images: [{ src: '/games/my-little-puppy/example01.jpg', caption: 'Example of profiling on the Nintendo Switch' }],
+          },
+          {
+            title: '',
+            body: 'Beyond raw performance, translating the game to console required tweaking values to improve player experience. I rebalanced the difficulty of mini-games, overhauled the input handling to smooth out the roughness of the controls, and added additional mechanics to assist platforming. The goal was to ensure the dog\'s movement and platforming feel natural and responsive on a thumbstick, providing a good experience across all devices.',
+          },
+          {
+            title: '',
+            body: 'The difference in platforms caused a lot of issues in the game, so naturally quick cycle of testing and fixing was crucial. I utilized CI tools, including Jenkins, NintendoSDK, and PS5SDK, to automate our deployment processes. This allowed the team to run fast, on-device iterations and test sessions, catching TRC violations and bugs early and significantly increasing our overall development speed.',
+          }
         ],
       },
       {
         heading: 'Takeaways',
-        body: 'Working on My Little Puppy at Dreamotion was my first professional project and a massive leap from my student days. Collaborating with a team of up to 29 people taught me how to work within established pipelines, communicate across disciplines, and deliver production-quality work under real deadlines. Shipping on multiple platforms (Steam, Switch, PS5) gave me hands-on experience with platform-specific requirements, optimization, and CI workflows that I wouldn\'t have gotten anywhere else.',
+        body: 'Working on My Little Puppy at Dreamotion was my first professional project and a massive leap from my student days. Collaborating with a team of up to 30 people taught me how to work within established pipelines, communicate across disciplines, and deliver production quality work under tight deadlines. Shipping on multiple platforms gave me hands-on experience with platform specific development that I wouldn\'t have gotten anywhere else.',
       },
     ],
   },
@@ -127,7 +139,7 @@ const PROJECTS: Project[] = [
       },
       {
         heading: 'Interesting Probelms',
-        body: 'Hmm... Literally everything was a new challenge for me as I had 0 programming knowledge prior to this project. Even using an IDE was a challenge for me. So, I would say there were no technical challenges, but more like a learning experience. Creating progression system and customizing Dialogue System was a bit challenging though😭',
+        body: 'Hmm... Literally everything was a new challenge for me as I had 0 game dev knowledge prior to this project. Even using an IDE was a challenge for me. So, I would say there were no technical challenges, but more like a learning experience. Creating progression system and customizing Dialogue System was a bit challenging though😭',
       },
       {
         heading: 'Takeaways',
@@ -299,12 +311,12 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ project, onBack }) => {
             )}
 
             {section.images && section.images.length > 0 && (
-              <div className={`grid gap-4 mb-4 ${section.images.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+              <div className={`grid gap-4 mb-4 ${section.images.length > 1 ? 'grid-cols-2' : 'mx-auto'}`} style={section.images.length === 1 ? { maxWidth: '50%' } : undefined}>
                 {section.images.map((img, j) => (
                   <figure key={j} className="rounded-xl overflow-hidden border-2 border-purple-100">
                     <img src={img.src} alt={img.caption || ''} className="w-full h-auto object-cover" />
                     {img.caption && (
-                      <figcaption className="px-3 py-2 text-xs text-gray-400 italic font-medium bg-purple-50/50">
+                      <figcaption className="px-3 py-2 text-xs text-gray-400 italic font-medium bg-purple-50/50 text-center" style={{ fontFamily: 'system-ui, sans-serif' }}>
                         {img.caption}
                       </figcaption>
                     )}
@@ -327,7 +339,7 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ project, onBack }) => {
                       onClick={(e) => e.preventDefault()}
                     />
                     {vid.caption && (
-                      <figcaption className="px-3 py-2 text-xs text-gray-400 italic font-medium bg-purple-50/50">
+                      <figcaption className="px-3 py-2 text-xs text-gray-400 italic font-medium bg-purple-50/50 text-center" style={{ fontFamily: 'system-ui, sans-serif' }}>
                         {vid.caption}
                       </figcaption>
                     )}
@@ -352,12 +364,12 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ project, onBack }) => {
                       </ul>
                     )}
                     {sub.images && sub.images.length > 0 && (
-                      <div className={`grid gap-4 mb-2 ${sub.images.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                      <div className={`grid gap-4 mb-2 ${sub.images.length > 1 ? 'grid-cols-2' : 'mx-auto'}`} style={sub.images.length === 1 ? { maxWidth: '50%' } : undefined}>
                         {sub.images.map((img, k) => (
                           <figure key={k} className="rounded-xl overflow-hidden border-2 border-purple-100">
                             <img src={img.src} alt={img.caption || ''} className="w-full h-auto object-cover" />
                             {img.caption && (
-                              <figcaption className="px-3 py-2 text-xs text-gray-400 italic font-medium bg-purple-50/50">
+                              <figcaption className="px-3 py-2 text-xs text-gray-400 italic font-medium bg-purple-50/50 text-center" style={{ fontFamily: 'system-ui, sans-serif' }}>
                                 {img.caption}
                               </figcaption>
                             )}
@@ -379,7 +391,7 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ project, onBack }) => {
                               onClick={(e) => e.preventDefault()}
                             />
                             {vid.caption && (
-                              <figcaption className="px-3 py-2 text-xs text-gray-400 italic font-medium bg-purple-50/50">
+                              <figcaption className="px-3 py-2 text-xs text-gray-400 italic font-medium bg-purple-50/50 text-center" style={{ fontFamily: 'system-ui, sans-serif' }}>
                                 {vid.caption}
                               </figcaption>
                             )}

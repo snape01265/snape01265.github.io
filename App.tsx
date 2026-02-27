@@ -98,6 +98,10 @@ const App: React.FC = () => {
         ))}
       </div>
 
+      <div className="absolute bottom-16 left-0 right-0 z-0 text-center">
+        <span className="text-purple-400/50 text-xs font-medium">Last Updated: Feb 27, 2026</span>
+      </div>
+
       <Taskbar windows={windows} onIconClick={focusWindow} onClose={closeWindow} />
     </div>
   );
