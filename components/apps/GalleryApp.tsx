@@ -96,6 +96,7 @@ const GalleryApp: React.FC = () => {
                     <img
                       src={src}
                       alt=""
+                      loading="lazy"
                       className="w-full aspect-square object-cover group-hover:brightness-110 transition-all duration-300"
                     />
                   </button>

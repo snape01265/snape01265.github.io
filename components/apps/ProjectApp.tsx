@@ -314,7 +314,7 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ project, onBack }) => {
               <div className={`grid gap-4 mb-4 ${section.images.length > 1 ? 'grid-cols-2' : 'mx-auto'}`} style={section.images.length === 1 ? { maxWidth: '50%' } : undefined}>
                 {section.images.map((img, j) => (
                   <figure key={j} className="rounded-xl overflow-hidden border-2 border-purple-100">
-                    <img src={img.src} alt={img.caption || ''} className="w-full h-auto object-cover" />
+                    <img src={img.src} alt={img.caption || ''} loading="lazy" className="w-full h-auto object-cover" />
                     {img.caption && (
                       <figcaption className="px-3 py-2 text-xs text-gray-400 italic font-medium bg-purple-50/50 text-center" style={{ fontFamily: 'system-ui, sans-serif' }}>
                         {img.caption}
@@ -367,7 +367,7 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ project, onBack }) => {
                       <div className={`grid gap-4 mb-2 ${sub.images.length > 1 ? 'grid-cols-2' : 'mx-auto'}`} style={sub.images.length === 1 ? { maxWidth: '50%' } : undefined}>
                         {sub.images.map((img, k) => (
                           <figure key={k} className="rounded-xl overflow-hidden border-2 border-purple-100">
-                            <img src={img.src} alt={img.caption || ''} className="w-full h-auto object-cover" />
+                            <img src={img.src} alt={img.caption || ''} loading="lazy" className="w-full h-auto object-cover" />
                             {img.caption && (
                               <figcaption className="px-3 py-2 text-xs text-gray-400 italic font-medium bg-purple-50/50 text-center" style={{ fontFamily: 'system-ui, sans-serif' }}>
                                 {img.caption}

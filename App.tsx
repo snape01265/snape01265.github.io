@@ -26,7 +26,7 @@ const INITIAL_WINDOWS: WindowInstance[] = [
   { id: 'about', title: 'Profile', icon: <User size={18} />, isOpen: true, isMinimized: false, zIndex: 12 },
   { id: 'resume', title: 'Resume', icon: <FileCode2 size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
   { id: 'paint', title: 'Sketchbook', icon: <Palette size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
-  { id: 'music', title: 'Music', icon: <Music size={18} />, isOpen: true, isMinimized: false, zIndex: 10 },
+  { id: 'music', title: 'Music', icon: <Music size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
   { id: 'gallery', title: 'Gallery', icon: <Image size={18} />, isOpen: false, isMinimized: false, zIndex: 10 },
 ];
 
@@ -78,10 +78,10 @@ const App: React.FC = () => {
       <div className="relative z-10 p-8 flex flex-wrap gap-4 items-start content-start">
         <DesktopIcon icon={<Gamepad2 size={32} />} label="Games" onClick={() => openWindow('projects')} color="text-pink-500" />
         <DesktopIcon icon={<Image size={32} />} label="Gallery" onClick={() => openWindow('gallery')} color="text-emerald-500" />
-        <DesktopIcon icon={<Palette size={32} />} label="Sketchbook" onClick={() => openWindow('paint')} color="text-orange-500" />
         <DesktopIcon icon={<Music size={32} />} label="Music" onClick={() => openWindow('music')} color="text-indigo-500" />
         <DesktopIcon icon={<User size={32} />} label="Profile" onClick={() => openWindow('about')} color="text-purple-500" />
         <DesktopIcon icon={<FileCode2 size={32} />} label="Resume" onClick={() => openWindow('resume')} color="text-blue-500" />
+        <DesktopIcon icon={<Palette size={32} />} label="Sketchbook" onClick={() => openWindow('paint')} color="text-orange-500" />
       </div>
 
       <div className="absolute inset-0 z-20 pointer-events-none">
