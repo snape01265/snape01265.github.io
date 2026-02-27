@@ -554,6 +554,8 @@ const createShuffledOrder = (length: number, excludeFirst?: number): number[] =>
   return order;
 };
 
+const MAX_VOLUME = 0.5;
+
 const MusicApp: React.FC = () => {
   const [songs] = useState<Song[]>(INITIAL_PLAYLIST);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -685,7 +687,7 @@ const MusicApp: React.FC = () => {
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = isMuted ? 0 : volume;
+      audioRef.current.volume = isMuted ? 0 : volume * MAX_VOLUME;
     }
   }, [volume, isMuted]);
 
