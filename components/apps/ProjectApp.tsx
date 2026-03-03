@@ -101,6 +101,61 @@ const PROJECTS: Project[] = [
     ],
   },
   {
+    id: 'space-haste',
+    title: 'Space Haste',
+    description: 'A 3D space racing game where players pilot spaceships through the cosmos. As project leader, I handled the full game flow and logic — movement, controls, camera, special abilities, UI, HUD, leaderboard, VFX, shooting, lighting, and post-processing.',
+    genre: '3D / Racing / Space',
+    thumbnail: '/games/space-haste/thumbnail.jpg',
+    tech: ['Unity', 'C#', 'Shader Graph'],
+    link: 'https://github.com/snape01265/Space-haste',
+    duration: 'Mar 2023 - Mar 2023 (2 weeks)',
+    teamSize: 4,
+    roles: ['Project Leader', 'General Programming', 'Game Design'],
+    platforms: ['PC'],
+    caseStudy: [
+      {
+        heading: '',
+        body: 'Space Haste is a 3D racing game set in outer space. I led the project and was responsible for implementing the majority of the game\'s systems, from spaceship controls to visual effects to the full game flow from lobby to race.',
+        videos: [{ src: 'https://www.youtube.com/watch?v=hVrAXYSy0VY', caption: 'Space Haste Gameplay' }],
+      },
+      {
+        heading: 'Features',
+        body: '',
+        bullets: [
+          'Spaceship controls and movement',
+          'Gimbal effect on player camera',
+          'UI input handling, animations, and HUD',
+          'Leaderboard, position tracking and real-time ranking display',
+          'Laser shooting and health system',
+          'Game flow logic from lobby to in-game',
+          'Shader, Visual Effect Graph, and Post-Processing for visual effects',
+          'Scene lighting (point & global) and volume-based Post-Processing',
+        ],
+      },
+      {
+        heading: 'Interesting Problems',
+        subsections: [
+          {
+            title: 'Natural Movement & Effects',
+            body: 'Applied vector math, calculus, and easing functions to achieve natural-feeling object movement and effects throughout the game. Getting the spaceship to feel responsive yet weighty in zero-gravity required careful tuning.',
+          },
+          {
+            title: 'Understanding Multiplayer Games',
+            body: 'Explored the fundamentals of networked game architecture. Mainly, how client and server communicate state, the challenges of latency and synchronization, and the trade-offs between authoritative and client-predicted models. Even in a small project like this, designing systems that could function correctly in a multiplayer context deepened my understanding of how games handle real-time data exchange.',
+          },
+        ],
+      },
+      {
+        heading: 'Takeaways',
+        body: 'From a programming perspective, building this game gave me insights into how a client should be structured and optimized for a networked environment.',
+      },
+      {
+        heading: '',
+        body: 'As the project lead, I gained experience far beyond the codebase. I learned about the importance of collaboration and communication between team members, scheduling and task delegation, and how to effectively convey a game design vision to the team. This project taught me what it truly means to lead a team project.',
+      },
+    ],
+  },
+  {
     id: 'soul-after',
     title: 'Soul After',
     description: 'A story-driven top-down adventure game that explores the relationship between life and death. Developed as a passion project by a team of 6 students, marking our debut in game development.',
@@ -327,24 +382,39 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ project, onBack }) => {
 
             {section.videos && section.videos.length > 0 && (
               <div className="flex flex-col gap-4 mb-4">
-                {section.videos.map((vid, j) => (
-                  <figure key={j} className="rounded-xl overflow-hidden border-2 border-purple-100">
-                    <video
-                      src={vid.src}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-auto"
-                      onClick={(e) => e.preventDefault()}
-                    />
-                    {vid.caption && (
-                      <figcaption className="px-3 py-2 text-xs text-gray-400 italic font-medium bg-purple-50/50 text-center" style={{ fontFamily: 'system-ui, sans-serif' }}>
-                        {vid.caption}
-                      </figcaption>
-                    )}
-                  </figure>
-                ))}
+                {section.videos.map((vid, j) => {
+                  const ytMatch = vid.src.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
+                  return (
+                    <figure key={j} className="rounded-xl overflow-hidden border-2 border-purple-100">
+                      {ytMatch ? (
+                        <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                          <iframe
+                            src={`https://www.youtube.com/embed/${ytMatch[1]}`}
+                            title={vid.caption || 'Video'}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            className="absolute inset-0 w-full h-full"
+                          />
+                        </div>
+                      ) : (
+                        <video
+                          src={vid.src}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="w-full h-auto"
+                          onClick={(e) => e.preventDefault()}
+                        />
+                      )}
+                      {vid.caption && (
+                        <figcaption className="px-3 py-2 text-xs text-gray-400 italic font-medium bg-purple-50/50 text-center" style={{ fontFamily: 'system-ui, sans-serif' }}>
+                          {vid.caption}
+                        </figcaption>
+                      )}
+                    </figure>
+                  );
+                })}
               </div>
             )}
 
@@ -379,24 +449,39 @@ const CaseStudyView: React.FC<CaseStudyViewProps> = ({ project, onBack }) => {
                     )}
                     {sub.videos && sub.videos.length > 0 && (
                       <div className="flex flex-col gap-4 mb-2">
-                        {sub.videos.map((vid, k) => (
-                          <figure key={k} className="rounded-xl overflow-hidden border-2 border-purple-100">
-                            <video
-                              src={vid.src}
-                              autoPlay
-                              loop
-                              muted
-                              playsInline
-                              className="w-full h-auto"
-                              onClick={(e) => e.preventDefault()}
-                            />
-                            {vid.caption && (
-                              <figcaption className="px-3 py-2 text-xs text-gray-400 italic font-medium bg-purple-50/50 text-center" style={{ fontFamily: 'system-ui, sans-serif' }}>
-                                {vid.caption}
-                              </figcaption>
-                            )}
-                          </figure>
-                        ))}
+                        {sub.videos.map((vid, k) => {
+                          const ytMatch = vid.src.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
+                          return (
+                            <figure key={k} className="rounded-xl overflow-hidden border-2 border-purple-100">
+                              {ytMatch ? (
+                                <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                                  <iframe
+                                    src={`https://www.youtube.com/embed/${ytMatch[1]}`}
+                                    title={vid.caption || 'Video'}
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                    className="absolute inset-0 w-full h-full"
+                                  />
+                                </div>
+                              ) : (
+                                <video
+                                  src={vid.src}
+                                  autoPlay
+                                  loop
+                                  muted
+                                  playsInline
+                                  className="w-full h-auto"
+                                  onClick={(e) => e.preventDefault()}
+                                />
+                              )}
+                              {vid.caption && (
+                                <figcaption className="px-3 py-2 text-xs text-gray-400 italic font-medium bg-purple-50/50 text-center" style={{ fontFamily: 'system-ui, sans-serif' }}>
+                                  {vid.caption}
+                                </figcaption>
+                              )}
+                            </figure>
+                          );
+                        })}
                       </div>
                     )}
                   </div>

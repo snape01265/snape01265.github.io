@@ -18,7 +18,7 @@ const AboutApp: React.FC<AboutAppProps> = ({ onOpenWindow }) => {
               className="w-full h-full object-cover rounded-full" 
             />
           </div>
-          <h1 className="pixel-font text-4xl font-bold text-purple-900 mb-1 uppercase">Client Programmer</h1>
+          <h1 className="pixel-font text-4xl font-bold text-purple-900 mb-1 uppercase">Gameplay Programmer</h1>
           <p className="text-gray-500 font-medium mt-1">I'm Sun, a team-oriented programmer who sets the stage for compelling gameplay and memorable storytelling experiences, focused on writing clean, efficient code.</p>
         </div>
 
