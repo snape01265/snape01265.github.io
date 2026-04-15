@@ -1,8 +1,0 @@
-{
-  "name": "DreamOS - Interactive Portfolio",
-  "description": "A customizable, OS-style portfolio website featuring draggable windows, a painting app, music player, and content manager with retro-modern aesthetics.",
-  "requestFramePermissions": [
-    "camera",
-    "microphone"
-  ]
-}

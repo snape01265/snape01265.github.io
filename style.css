@@ -1,0 +1,28 @@
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%; 
+}
+
+.page {
+    display: none; 
+}
+
+.page.active {
+    display: block;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-top: 5%;
+    gap: 20px;
+}
+
+#links {
+    display: flex;
+    flex-direction: row; 
+    gap: 20px;
+}
