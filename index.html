@@ -1,50 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- Metadata -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="programmer, coding, game development, game developer, client development, gameplay programming, c++, c#, unreal engine, unity, english, korean"/>
-    <meta name="description" content="Game and software developer focused on client and gameplay programming in c# and c++."/>
+    <head>
+        <!-- Metadata -->
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="keywords" content="programmer, coding, game development, game developer, client development, gameplay programming, c++, c#, unreal engine, unity, english, korean"/>
+        <meta name="description" content="Game and software developer focused on client and gameplay programming in c# and c++."/>
 
-    <title>Sunwoo Lee</title>
+        <title>Sunwoo Lee</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
-</head>
+        <!-- CSS -->
+        <link rel="stylesheet" href="style.css"/>
+    </head>
 
 <body>
-    <div class="landing-page">
+    <div id="landing" class="page active">
+        <div id="profile">Sunwoo Lee</div>
+    
+        <header class="button-container">
+            <a href="#/" class="button">Home</a>
+            <a href="#/projects" class="button">Projects</a>
+            <a href="#/experience" class="button">Experience</a>
+            <a href="#/gallery" class="button">Gallery</a>
+            <a href="#/profile" class="button">About Me</a>
+        </header>
         
-        <div id="landing" class="page active">
-            <div id="profile">Sunwoo Lee</div>
-        
-            <div class="button-container">
-                <button onclick="showPage('projects')">Projects</button>
-                <button onclick="showPage('experience')">Experience</button>
-                <button onclick="showPage('gallery')">Gallery</button>
-                <button onclick="showPage('aboutme')">About Me</button>
-            </div>
+        <main id="app-root">
+        </main>
 
-            <div id="links">
-                <a href="https://github.com/snape01265" target="_blank">GitHub</a>
-                <a href="https://linkedin.com/in/sunwoo-lee-7241131a4" target="_blank">LinkedIn</a>
-            </div>
-        </div>
-
-        <div id="projects" class="page">
-            <h2>Projects</h2>
-            <p>Details about projects will go here.</p>
-            <button onclick="showPage('landing')">Return</button>
-        </div>
-
-        <div id="experience" class="page">
-            <h2>Experience</h2>
-            <p>Details about experience will go here.</p>
-            <button onclick="showPage('landing')">Return</button>
-        </div>
-
-        <script src="script.js"></script>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

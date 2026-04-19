@@ -1,0 +1,14 @@
+Language: JavaScript
+
+# Enforce Allman style braces
+BreakBeforeBraces: Allman
+
+# Remove space between 'if' and '('
+SpaceBeforeParens: Never
+
+# Add spaces inside control statements -> if( hash === '' )
+SpacesInConditionalStatement: true
+
+# Keep indent and tab width to 4 spaces
+IndentWidth: 4
+TabWidth: 4
