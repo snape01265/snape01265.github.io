@@ -3,6 +3,8 @@ const routes = {
     '/' : 'pages/home.html',
     '/projects' : 'pages/projects.html',
     '/experience' : 'pages/experience.html',
+    '/gallery' : 'pages/gallery.html',
+    '/profile' : 'pages/profile.html',
 
     // Individual project pages
     '/projects/my-little-puppy' : 'pages/projects/my-little-puppy.html',
