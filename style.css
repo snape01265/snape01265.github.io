@@ -1,3 +1,14 @@
+:root {
+    --bg-main: rgb(35, 83, 89);
+    --text-main: rgb(209, 217, 197);
+    --accent-pink: rgb(217, 59, 127);
+    --light-pink: rgb(217, 150, 196);
+
+    /* Raw RGB numbers (useful for rgba() transparencies) */
+    --glow-color: 255, 255, 255; /* White */
+    --purple-glow: 168, 85, 247; /* Purple */
+}
+
 .landing-page {
     display: flex;
     flex-direction: column;
@@ -13,12 +24,58 @@
     display: block;
 }
 
+body {
+    background-color: var(--bg-main); 
+    
+    color: var(--text-main); 
+    
+    margin: 0; 
+}
+
 .button-container {
     display: flex;
     flex-direction: column;
     align-items: end;
     margin-top: 5%;
     gap: 20px;
+}
+
+.skills-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+#skills-chart-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--accent-pink);
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+
+.metric {
+    border: 1px solid rgba(217, 150, 196, 0.75);
+
+    background: linear-gradient(to right, 
+        rgba(255, 255, 255, 0.15) 0%, 
+        rgba(255, 255, 255, 0) 50%, 
+        rgba(255, 255, 255, 0.15) 100%);
+    
+    box-shadow: inset 0 0 10px rgba(217, 59, 127, 0.3);
+
+    color: var(--accent-pink);
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
 }
 
 #links {
