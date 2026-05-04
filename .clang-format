@@ -12,3 +12,6 @@ SpacesInConditionalStatement: true
 # Keep indent and tab width to 4 spaces
 IndentWidth: 4
 TabWidth: 4
+
+# Get rid of column limit
+ColumnLimit: 0

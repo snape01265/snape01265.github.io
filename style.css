@@ -6,8 +6,9 @@
     --text-main: rgb(209, 217, 197);
     --accent-pink: rgb(217, 59, 127);
     --light-pink: rgb(227, 155, 167);
-
     --light-pink-raw: 217, 150, 196;
+    --box-shadow: rgba(0, 0, 0, 0.5);
+    --dimmed-bg: rgba(0, 0, 0, 0.7);
 }
 
 /* =========================================
@@ -101,6 +102,118 @@ body {
 }
 
 /* =========================================
+   GALLERY PAGE
+   ========================================= */
+.gallery-block {
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.gallery-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-main);
+    border-bottom: 2px solid var(--light-pink);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 15px;
+}
+
+.gallery-thumbnail {
+width: 100%;
+    aspect-ratio: 1 / 1; 
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.gallery-thumbnail:hover {
+    transform: scale(1.05);
+    border-color: var(--accent-pink);
+}
+
+.modal {
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background-color: var(--dimmed-bg); 
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 0 30px var(--box-shadow);
+    user-select: none;
+}
+
+.modal-nav {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    padding: 16px;
+    color: var(--text-main);
+    font-weight: bold;
+    font-size: 40px;
+    transition: color 0.3s;
+    user-select: none;
+    z-index: 3;
+}
+
+.modal-nav.prev {
+    left: 20px;
+}
+
+.modal-nav.next {
+    right: 20px;
+}
+
+.modal-nav:hover {
+    color: var(--accent-pink);
+}
+
+.modal-close {
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: var(--text-main);
+    font-weight: bold;
+    font-size: 40px;
+    transition: color 0.2s;
+    user-select: none;
+    z-index: 3;
+}
+
+.modal-close:hover {
+    color: var(--accent-pink);
+}
+
+/* =========================================
    PROFILE PAGE
    ========================================= */
 #profile
@@ -109,6 +222,14 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 20px;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(var(--light-pink-raw), 0.4);
+    margin-top: 20px;
 }
 
 .skills-chart {

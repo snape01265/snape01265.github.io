@@ -1,3 +1,7 @@
+// --------------------------------
+// Page routing logic
+// --------------------------------
+
 const routes = {
     // Landing pages
     '/' : 'pages/home.html',
@@ -50,6 +54,11 @@ async function LoadPage(appRoot, routePath)
         const html = await response.text();
 
         appRoot.innerHTML = html;
+
+        if( routePath === 'pages/gallery.html' )
+        {
+            renderGallery();
+        }
     }
     catch( error )
     {

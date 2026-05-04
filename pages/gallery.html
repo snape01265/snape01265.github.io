@@ -1,3 +1,12 @@
 <div class="page-container">
+    <div id="gallery-container"></div>
 
+    <div id="modal" class="modal" onclick="closeModal()">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+
+        <a class="modal-nav prev" onclick="changeImage(-1, event)">&#10094;</a>
+        <a class="modal-nav next" onclick="changeImage(1, event)">&#10095;</a>
+        
+        <img id="modal-image" class="modal-image" onclick="event.stopPropagation()">
+    </div>
 </div>
