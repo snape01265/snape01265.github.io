@@ -11,9 +11,10 @@ const routes = {
     '/profile' : 'pages/profile.html',
 
     // Individual project pages
+    '/projects/climb' : 'pages/projects/climb.html',
     '/projects/my-little-puppy' : 'pages/projects/my-little-puppy.html',
-    '/projects/soul-after' : 'pages/projects/soul-after.html',
     '/projects/space-haste' : 'pages/projects/space-haste.html',
+    '/projects/soul-after' : 'pages/projects/soul-after.html',
 };
 
 async function Router()

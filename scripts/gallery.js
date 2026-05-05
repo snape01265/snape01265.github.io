@@ -1,5 +1,5 @@
 // --------------------------------
-// Gallery image logic
+// Gallery modal logic
 // --------------------------------
 
 const galleryData = [
