@@ -67,5 +67,29 @@ async function LoadPage(appRoot, routePath)
     }
 }
 
+function SwitchTab(tabName)
+{
+    const tabs = document.querySelectorAll('.tab-content');
+
+    for( let i = 0; i < tabs.length; i++ )
+    {
+        tabs[i].classList.remove('active');
+    }
+
+    const activeTab = document.getElementById('tab-' + tabName);
+    
+    if( activeTab !== null )
+    {
+        activeTab.classList.add('active');
+    }
+
+    const bottomDivider = document.getElementById('dynamic-divider');
+    if( bottomDivider !== null )
+    {
+        bottomDivider.classList.remove('hidden');
+    }
+}
+
+window.SwitchTab = SwitchTab;
 window.addEventListener('hashchange', Router);
 window.addEventListener('load', Router);
