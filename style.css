@@ -78,6 +78,16 @@ body {
     color: var(--accent-color);
 }
 
+.inline-link {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.inline-link:hover {
+    color: var(--accent-color);
+}
+
 .section-divider {
     border: 0;
     border-top: 2px solid var(--light-color);
@@ -132,6 +142,64 @@ body {
 
 .tab-content.active {
     display: block;
+}
+
+.experience-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-small);
+}
+
+.experience-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.experience-block:not(:last-child) {
+    border-bottom: 1px solid var(--light-color);
+    padding-bottom: var(--gap-normal); 
+}
+
+.experience-title {
+    color: var(--text-main);
+    margin: 0;
+    margin-bottom: var(--gap-small);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.experience-date {
+    color: var(--text-main);
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: var(--gap-small);
+}
+
+.experience-role {
+    color: var(--text-main);
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: var(--gap-half);
+}
+
+.experience-desc {
+    color: var(--text-main);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.experience-list-items {
+    padding: 0;
+    margin-top: var(--gap-half);
+    list-style-position: inside; 
+}
+
+.experience-list-items li {
+    color: var(--text-main);
 }
 
 /* =========================================
