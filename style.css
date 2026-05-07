@@ -4,11 +4,15 @@
 :root {
     --bg-main: rgb(8, 57, 65);
     --text-main: rgb(209, 217, 197);
-    --accent-pink: rgb(217, 59, 127);
-    --light-pink: rgb(227, 155, 167);
-    --light-pink-raw: 217, 150, 196;
+    --accent-color: rgb(217, 59, 127);
+    --light-color: rgb(227, 155, 167);
+    --light-color-raw: 217, 150, 196;
     --box-shadow: rgba(0, 0, 0, 0.5);
     --dimmed-bg: rgba(0, 0, 0, 0.7);
+
+    --gap-normal: 40px;
+    --gap-half: 20px;
+    --gap-small: 10px;
 }
 
 /* =========================================
@@ -44,22 +48,22 @@ body {
 }
 
 .button:hover {
-    color: var(--accent-pink);
+    color: var(--accent-color);
 }
 
 .button-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    margin-bottom: 40px;
+    gap: var(--gap-half);
+    margin-bottom: var(--gap-normal);
 }
 
 .button-container-top {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: var(--gap-small);
     font-size: xx-large;
 }
 
@@ -71,7 +75,26 @@ body {
 }
 
 .back-button:hover {
-    color: var(--accent-pink);
+    color: var(--accent-color);
+}
+
+.section-divider {
+    border: 0;
+    border-top: 2px solid var(--light-color);
+    margin-bottom: var(--gap-normal);
+}
+
+.section-divider-top {
+    border: 0;
+    border-top: 2px solid var(--light-color);
+    padding-top: var(--gap-normal);
+    width: 90%;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none;
 }
 
 /* =========================================
@@ -81,14 +104,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10%; 
 }
 
 .social-links {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
+    gap: var(--gap-half);
+    margin-top: var(--gap-half);
 }
 
 .social-icon {
@@ -98,14 +120,25 @@ body {
 }
 
 .social-icon:hover {
-    color: var(--accent-pink);
+    color: var(--accent-color);
+}
+
+/* =========================================
+   EXPERIENCE TABS
+   ========================================= */
+.tab-content {
+    display: none; 
+}
+
+.tab-content.active {
+    display: block;
 }
 
 /* =========================================
    GALLERY PAGE
    ========================================= */
 .gallery-block {
-    margin-bottom: 50px;
+    margin-bottom: var(--gap-normal);
     width: 100%;
 }
 
@@ -113,15 +146,15 @@ body {
     font-size: 24px;
     font-weight: bold;
     color: var(--text-main);
-    border-bottom: 2px solid var(--light-pink);
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+    border-bottom: 2px solid var(--light-color);
+    padding-bottom: var(--gap-small);
+    margin-bottom: var(--gap-half);
 }
 
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
-    gap: 15px;
+    gap: var(--gap-half);
 }
 
 .gallery-thumbnail {
@@ -136,7 +169,7 @@ width: 100%;
 
 .gallery-thumbnail:hover {
     transform: scale(1.05);
-    border-color: var(--accent-pink);
+    border-color: var(--accent-color);
 }
 
 .modal {
@@ -193,7 +226,7 @@ width: 100%;
 }
 
 .modal-nav:hover {
-    color: var(--accent-pink);
+    color: var(--accent-color);
 }
 
 .modal-close {
@@ -210,7 +243,7 @@ width: 100%;
 }
 
 .modal-close:hover {
-    color: var(--accent-pink);
+    color: var(--accent-color);
 }
 
 /* =========================================
@@ -221,22 +254,22 @@ width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: var(--gap-half);
 }
 
 .profile-pic {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    box-shadow: 0 0 15px rgba(var(--light-pink-raw), 0.4);
-    margin-top: 20px;
+    box-shadow: 0 0 15px rgba(var(--light-color-raw), 0.4);
+    margin-top: var(--gap-half);
 }
 
 .skills-chart {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 30px;
+    gap: var(--gap-small);
+    margin-bottom: var(--gap-half);
 }
 
 #skills-chart-title {
@@ -244,21 +277,20 @@ width: 100%;
     font-weight: bold;
     font-size: 20px;
     color: var(--text-main);
-    margin-bottom: 10px;
-    padding-bottom: 5px;
+    margin-bottom: var(--gap-half);
 }
 
 .metric {
-    border: 1px solid var(--light-pink);
+    border: 1px solid var(--light-color);
 
     background: linear-gradient(to right, 
-        rgba(var(--light-pink-raw), 0.15) 0%,
+        rgba(var(--light-color-raw), 0.15) 0%,
         transparent 50%, 
-        rgba(var(--light-pink-raw), 0.15) 100%);
+        rgba(var(--light-color-raw), 0.15) 100%);
     
-    box-shadow: inset 0 0 10px var(--light-pink);
+    box-shadow: inset 0 0 10px var(--light-color);
 
-    color: var(--light-pink);
+    color: var(--light-color);
     padding: 8px 10px;
     border-radius: 4px;
     font-weight: bold;
