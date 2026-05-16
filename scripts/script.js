@@ -6,7 +6,9 @@ const routes = {
     // Landing pages
     '/' : 'pages/home.html',
     '/projects' : 'pages/projects.html',
-    '/experience' : 'pages/experience.html',
+    // '/experience' : 'pages/experience.html',
+    '/experience/education' : 'pages/education.html',
+    '/experience/work' : 'pages/work.html',
     '/gallery' : 'pages/gallery.html',
     '/profile' : 'pages/profile.html',
 
