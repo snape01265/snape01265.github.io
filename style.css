@@ -134,6 +134,86 @@ body {
 }
 
 /* =========================================
+   PROJECT THUMBNAILS
+   ========================================= */
+.project-thumbnails
+{
+    display: flex;
+    justify-content: center;
+    gap: var(--gap-half);
+    flex-wrap: wrap;
+    margin-bottom: var(--gap-normal);
+}
+
+.project-thumb
+{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid var(--light-color);
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.project-thumb:hover
+{
+    transform: scale(1.1);
+    border-color: var(--accent-color);
+}
+
+/* =========================================
+   PROJECT CONTENT & TAGS
+   ========================================= */
+.project-content
+{
+    display: none;
+    text-align: left;
+}
+
+.project-content.active-project
+{
+    display: block;
+}
+
+.project-tags
+{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tag
+{
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* =========================================
+   IN-TEXT IMAGES
+   ========================================= */
+.desc-figure {
+    margin: 30px 0; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.desc-figure img {
+    max-width: 90%; 
+}
+
+.desc-figure figcaption {
+    margin-top: 4px;
+    font-size: 14px;
+    color: var(--text-main);
+    opacity: 0.7; 
+}
+
+/* =========================================
    EXPERIENCE TABS
    ========================================= */
 .tab-content {
@@ -194,8 +274,11 @@ body {
 
 .experience-list-items {
     padding: 0;
+    list-style-position: inside;
+    width: fit-content;
+    text-align: left;
+    margin: 0 auto;
     margin-top: var(--gap-half);
-    list-style-position: inside; 
 }
 
 .experience-list-items li {

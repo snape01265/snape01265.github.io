@@ -3,47 +3,14 @@
 </script>
 
 <div class="page-container">
-    
-    <h2>My Creations</h2>
-    
-    <a href="#/projects/climb" class="project-card-link">
-        <div class="project-card">
-            <img src="assets/climb-thumb.jpg" alt="C.L.I.M.B">
-            <div class="project-info">
-                <h3>C.L.I.M.B</h3>
-                <p>Work in progress</p>
-            </div>
-        </div>
-    </a>
+        
+    <div class="project-thumbnails">
+        <img src="assets/projects/climb-thumb.jpg" alt="CLIMB" class="project-thumb" onclick="switchProject('climb')">
+        <img src="assets/projects/my-little-puppy-thumb.jpg" alt="My Little Puppy" class="project-thumb" onclick="switchProject('my-little-puppy')">
+        <img src="assets/projects/space-haste-thumb.jpg" alt="Space Haste" class="project-thumb" onclick="switchProject('space-haste')">
+        <img src="assets/projects/soul-after-thumb.jpg" alt="Soul After" class="project-thumb" onclick="switchProject('soul-after')">
+    </div>
 
-    <a href="#/projects/my-little-puppy" class="project-card-link">
-        <div class="project-card">
-            <img src="assets/mlp-thumb.jpg" alt="My Little Puppy">
-            <div class="project-info">
-                <h3>My Little Puppy</h3>
-                <p>A heartwarming adventure game about a dog's journey through the afterlife.</p>
-            </div>
-        </div>
-    </a>
-    
-    <a href="#/projects/space-haste" class="project-card-link">
-        <div class="project-card">
-            <img src="assets/space-haste-thumb.jpg" alt="Space Haste">
-            <div class="project-info">
-                <h3>Space Haste</h3>
-                <p>An action-packed space shooter with fast-paced combat and stunning visuals.</p>
-            </div>
-        </div>
-    </a>
-
-    <a href="#/projects/soul-after" class="project-card-link">
-        <div class="project-card">
-            <img src="assets/soul-after-thumb.jpg" alt="Soul After">
-            <div class="project-info">
-                <h3>Soul After</h3>
-                <p>A narrative-driven RPG exploring themes of life, death, and the afterlife.</p>
-            </div>
-        </div>
-    </a>
-
-</div>
+    <hr id="project-divider" class="section-divider hidden">
+    <div id="project-display" class="project-content"></div>
+</div> 
