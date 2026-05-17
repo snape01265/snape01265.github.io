@@ -51,6 +51,12 @@ body {
     color: var(--accent-color);
 }
 
+.button.active {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color); 
+    padding-bottom: 4px;
+}
+
 .button-container {
     display: flex;
     justify-content: center;
@@ -238,9 +244,8 @@ body {
     text-align: center;
 }
 
-.experience-block:not(:last-child) {
-    border-bottom: 1px solid var(--light-color);
-    padding-bottom: var(--gap-normal); 
+.experience-block:is(:last-child) {
+    margin-bottom: var(--gap-normal);
 }
 
 .experience-title {

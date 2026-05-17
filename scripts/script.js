@@ -28,6 +28,8 @@ async function Router()
         hash = '/';
     }
 
+    UpdateMainNavigation(hash);
+
     const routePath = routes[hash];
     const appRoot = document.getElementById('app-root');
 
@@ -36,14 +38,12 @@ async function Router()
 
 async function LoadPage(appRoot, routePath)
 {
-    // If route is invalid, redirect to home
     if( routePath === undefined )
     {
         window.location.hash = '#/';
         return;
     }
 
-    // If app root is not found, log an error and redirect to home
     if( appRoot === null )
     {
         console.error("App root element not found");
@@ -57,7 +57,7 @@ async function LoadPage(appRoot, routePath)
         const html = await response.text();
 
         appRoot.innerHTML = html;
-
+        
         if( routePath === 'pages/gallery.html' )
         {
             renderGallery();
@@ -90,6 +90,37 @@ function SwitchTab(tabName)
     if( bottomDivider !== null )
     {
         bottomDivider.classList.remove('hidden');
+    }
+
+    const tabButtons = document.querySelectorAll('.button-container .button');
+
+    for( let i = 0; i < tabButtons.length; i++ )
+    {
+        const btn = tabButtons[i];
+        
+        btn.classList.remove('active');
+        
+        if( btn.getAttribute('href') === '#/experience/' + tabName )
+        {
+            btn.classList.add('active');
+        }
+    }
+}
+
+function UpdateMainNavigation(hash)
+{
+    const navLinks = document.querySelectorAll('a.button');
+    const targetHref = '#' + hash;
+
+    for( let i = 0; i < navLinks.length; i++ )
+    {
+        const link = navLinks[i];
+        link.classList.remove('active');
+
+        if( link.getAttribute('href') === targetHref )
+        {
+            link.classList.add('active');
+        }
     }
 }
 
