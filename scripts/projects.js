@@ -3,36 +3,45 @@
 // --------------------------------
 
 const projectData = {
-    "climb" : {
+    "climb" : 
+    {
         title : "CLIMB",
         date : "2026.04~",
         tags : ["C++", "Unreal Engine"],
-        description : `Working on a new project called CLIMB...`,
+        description : `
+        <p>C.L.I.M.B is an incremental 3D climbing game I am currently developing. My goal for this project is to learn how to create games using UE5 and C++.</p>
+        <figure class="desc-figure">
+            <img src="assets/projects/climb/01.jpg" alt="CLIMB Gameplay">
+            <figcaption>Prototype</figcaption>
+        </figure>
+        <p>Although the main objective of this project is to learn a new language and engine, I am enjoying having full authorship of the entire codebase and participating in game design of core gameplay mechanics.</p>
+        `,
     },
     "my-little-puppy" : {
         title : "My Little Puppy",
         date : "2023.05~2026.03",
         tags : ["C#", "Unity"],
-        description : `<p>This is the first paragraph of text. I can explain the initial concept of the game here, talking about the core mechanics and what inspired the project.</p>
-        
-        <figure class="desc-figure">
-            <img src="assets/gallery/soul-after/01.jpg" alt="Soul After Gameplay">
-            <figcaption>Early prototype showcasing the combat system.</figcaption>
-        </figure>
-
-        <p>This is the text that continues immediately after the image. You can add as many paragraphs or figures as you want down the page!</p>`,
+        description : `
+        <p>My Little Puppy is </p>
+        `,
     },
-    "space-haste" : {
+    "space-haste" : 
+    {
         title : "Space Haste",
         date : "2023.03~2023.03",
         tags : ["C#", "Unity"],
-        description : `fast as f boi`,
+        description : `
+        fast as f boi
+        `,
     },
-    "soul-after" : {
+    "soul-after" : 
+    {
         title : "Soul After",
         date : "2021.08~2022.08",
         tags : ["C#", "Unity"],
-        description : `first`
+        description : `
+        <p>This project was </p>
+        `,
     },
 }
 
