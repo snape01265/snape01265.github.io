@@ -3,49 +3,56 @@
 // --------------------------------
 
 const projectData = {
-    "climb" : 
-    {
-        title : "CLIMB",
-        date : "2026.04~",
-        tags : ["C++", "Unreal Engine"],
-        description : `
-        <p>C.L.I.M.B is an incremental 3D climbing game I am currently developing. My goal for this project is to learn how to create games using UE5 and C++.</p>
-        <figure class="desc-figure">
-            <img src="assets/projects/climb/01.jpg" alt="CLIMB Gameplay">
-            <figcaption>Prototype</figcaption>
-        </figure>
-        <p>Although the main objective of this project is to learn a new language and engine, I am enjoying having full authorship of the entire codebase and participating in game design of core gameplay mechanics.</p>
-        `,
-    },
-    "my-little-puppy" : {
-        title : "My Little Puppy",
-        date : "2023.05~2026.03",
-        tags : ["C#", "Unity"],
-        description : `
-        <p>My Little Puppy is </p>
-        `,
-    },
-    "space-haste" : 
-    {
-        title : "Space Haste",
-        date : "2023.03~2023.03",
-        tags : ["C#", "Unity"],
-        description : `
-        fast as f boi
-        `,
-    },
-    "soul-after" : 
-    {
-        title : "Soul After",
-        date : "2021.08~2022.08",
-        tags : ["C#", "Unity"],
-        description : `
-        <p>This project was </p>
-        `,
-    },
-}
+    "climb" :
+        {
+            title : "CLIMB",
+            about : `<p>An incremental 3D climbing game.</p>`,
+            info :
+                {
+                    "Date" : "2026.04 -",
+                    "Engine" : "Unreal Engine",
+                    "Team Size" : "2",
+                }
+        },
+    "my-little-puppy" :
+        {
+            title : "My Little Puppy",
+            about : `<p>A heartwarming adventure game about a dog\'s journey through the afterlife to reunite with his owner.</p>
+            <p>Developed at Dreamotion Inc. in a team scaling up to 30 members, this project marked my entry into the professional game industry.</p>`,
+            info :
+                {
+                    "Date" : "2023.05 - 2026.03",
+                    "Engine" : "Unity",
+                    "Team Size" : "30+",
+                }
+        },
+    "space-haste" :
+        {
+            title : "Space Haste",
+            about : `<p>A 3D space racing game where players pilot spaceships through the cosmos.</p>
+            <p>Created as a Capstone Project for the KRAFTON Jungle bootcamp. I have taken the role of a team leader in this project.</p>`,
+            info :
+                {
+                    "Date" : "2023.03 - 2023.03",
+                    "Engine" : "Unity",
+                    "Team Size" : "4",
+                }
+        },
+    "soul-after" :
+        {
+            title : "Soul After",
+            about : `<p>A story-driven top-down adventure game that explores the relationship between life and death.</p>
+            <p>Developed as a passion project by a team of 6 students, marking our debut in game development.</p>`,
+            info :
+                {
+                    "Date" : "2021.08 - 2022.08",
+                    "Engine" : "Unity",
+                    "Team Size" : "6",
+                }
+        },
+};
 
-function switchProject(projectId)
+async function SwitchProject(projectId)
 {
     const display = document.getElementById('project-display');
     const divider = document.getElementById('project-divider');
@@ -54,33 +61,112 @@ function switchProject(projectId)
     if( data === undefined )
         return;
 
-    let tagsHtml = '';
-    
-    if( data.tags && data.tags.length > 0 )
+    let htmlInfo = "";
+
+    if( data.info )
     {
-        for( let i = 0; i < data.tags.length; i++ )
+        for( const key in data.info )
         {
-            tagsHtml += `<span class="tag">${data.tags[i]}</span>`;
+            const value = data.info[key];
+
+            htmlInfo += `
+                <div class="info-row">
+                    <span class="info-key">${key}</span>
+                    <span class="info-value">${value}</span>
+                </div>
+            `;
         }
+    }
+
+    let htmlDescription = "";
+    try
+    {
+        const response = await fetch(`pages/projects/${projectId}.html`);
+
+        if( response.ok )
+        {
+            htmlDescription = await response.text();
+        }
+        else
+        {
+            htmlDescription = `<p>Project description not available.</p>`;
+        }
+    }
+    catch( error )
+    {
+        console.error("Failed to load project description:", error);
+        htmlDescription = `<p>Error loading project description.</p>`;
     }
 
     display.innerHTML = `
         <h2 class="project-title">${data.title}</h2>
-        <div class="project-tags">
-            <span class="tag">Date: ${data.date}</span>
-            ${tagsHtml}
+        <div class="project-header-container">
+            <div class="project-about-block">
+                <h3>About</h3>
+                ${data.about}
+            </div>
+            <div class="project-info-block">
+                ${htmlInfo}
+            </div>
         </div>
-        <p class="project-desc">${data.description}</p>
+        <div class="project-desc">${htmlDescription}</div>
     `;
 
     divider.classList.remove('hidden');
     display.classList.remove('active-project');
-    
-    setTimeout(function() 
-    {
+
+    setTimeout(function() {
         display.classList.add('active-project');
     }, 10);
+
+    const thumbnails = document.querySelectorAll('.project-thumb');
+    for( let i = 0; i < thumbnails.length; i++ )
+    {
+        thumbnails[i].classList.remove('active-project');
+    }
+
+    const activeThumbnail = document.querySelector(`.project-thumb[onclick="switchProject('${projectId}')"]`);
+    if( activeThumbnail )
+    {
+        activeThumbnail.classList.add('active-project');
+    }
 }
 
-window.switchProject = switchProject;
+async function OpenCodeModal(filePath)
+{
+    const modal = document.getElementById('code-modal');
+    const modalBody = document.getElementById('code-modal-body');
+
+    modalBody.textContent = "Loading...";
+    modal.classList.add('active');
+
+    try
+    {
+        const response = await fetch(filePath);
+
+        if( response.ok )
+        {
+            const codeText = await response.text();
+            modalBody.textContent = codeText;
+        }
+        else
+        {
+            modalBody.textContent = "Failed to load code file.";
+        }
+    }
+    catch( error )
+    {
+        console.error("Failed to load code file:", error);
+        modalBody.textContent = "Something went wrong while fetching the code.";
+    }
+}
+
+function CloseCodeModal()
+{
+    document.getElementById('code-modal').classList.remove('active');
+}
+
+window.SwitchProject = SwitchProject;
+window.OpenCodeModal = OpenCodeModal;
+window.CloseCodeModal = CloseCodeModal;
 window.projectData = projectData;

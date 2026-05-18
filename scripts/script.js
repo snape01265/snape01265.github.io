@@ -6,7 +6,6 @@ const routes = {
     // Landing pages
     '/' : 'pages/home.html',
     '/projects' : 'pages/projects.html',
-    // '/experience' : 'pages/experience.html',
     '/experience/education' : 'pages/education.html',
     '/experience/work' : 'pages/work.html',
     '/gallery' : 'pages/gallery.html',
@@ -21,19 +20,29 @@ const routes = {
 
 async function Router()
 {
-    let hash = window.location.hash.replace('#', '');
+    let fullHash = window.location.hash.replace('#', '');
+    let hash = fullHash;
+    let queryString = '';
+
+    if( fullHash.indexOf('?') !== -1 )
+    {
+        const parts = fullHash.split('?');
+        hash = parts[0];
+        queryString = parts[1];
+    }
 
     if( hash === '' )
     {
         hash = '/';
     }
 
-    UpdateMainNavigation(hash);
-
     const routePath = routes[hash];
     const appRoot = document.getElementById('app-root');
 
-    return LoadPage(appRoot, routePath);
+    await LoadPage(appRoot, routePath);
+
+    UpdateMainNavigation(hash);
+    HandleQueryParams(queryString, hash);
 }
 
 async function LoadPage(appRoot, routePath)
@@ -57,10 +66,10 @@ async function LoadPage(appRoot, routePath)
         const html = await response.text();
 
         appRoot.innerHTML = html;
-        
+
         if( routePath === 'pages/gallery.html' )
         {
-            renderGallery();
+            RenderGallery();
         }
     }
     catch( error )
@@ -80,7 +89,7 @@ function SwitchTab(tabName)
     }
 
     const activeTab = document.getElementById('tab-' + tabName);
-    
+
     if( activeTab !== null )
     {
         activeTab.classList.add('active');
@@ -97,9 +106,9 @@ function SwitchTab(tabName)
     for( let i = 0; i < tabButtons.length; i++ )
     {
         const btn = tabButtons[i];
-        
+
         btn.classList.remove('active');
-        
+
         if( btn.getAttribute('href') === '#/experience/' + tabName )
         {
             btn.classList.add('active');
@@ -109,18 +118,52 @@ function SwitchTab(tabName)
 
 function UpdateMainNavigation(hash)
 {
-    const navLinks = document.querySelectorAll('a.button');
     const targetHref = '#' + hash;
+    const mainNavLinks = document.querySelectorAll('#landing > header.button-container a.button');
 
-    for( let i = 0; i < navLinks.length; i++ )
+    for( let i = 0; i < mainNavLinks.length; i++ )
     {
-        const link = navLinks[i];
+        const link = mainNavLinks[i];
+        const linkHref = link.getAttribute('href');
+
         link.classList.remove('active');
 
-        if( link.getAttribute('href') === targetHref )
+        const pathParts = linkHref.split('/');
+        const basePath = pathParts[0] + '/' + pathParts[1];
+
+        if( targetHref.startsWith(basePath) )
         {
             link.classList.add('active');
         }
+    }
+
+    const subNavLinks = document.querySelectorAll('#app-root a.button');
+
+    for( let i = 0; i < subNavLinks.length; i++ )
+    {
+        const link = subNavLinks[i];
+        const linkHref = link.getAttribute('href');
+
+        link.classList.remove('active');
+
+        if( linkHref === targetHref )
+        {
+            link.classList.add('active');
+        }
+    }
+}
+
+function HandleQueryParams(queryString, hash)
+{
+    if( queryString === '' )
+        return;
+
+    const params = new URLSearchParams(queryString);
+
+    if( hash === '/projects' )
+    {
+        const projectId = params.get('project');
+        window.switchProject(projectId);
     }
 }
 

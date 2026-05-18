@@ -49,7 +49,7 @@ const galleryData = [
 let currentProjectIndex = -1;
 let currentImageIndex = -1;
 
-function renderGallery()
+function RenderGallery()
 {
     const container = document.getElementById('gallery-container');
 
@@ -78,7 +78,7 @@ function renderGallery()
     container.innerHTML = html;
 }
 
-function openModal(projectIndex, imageIndex)
+function OpenModal(projectIndex, imageIndex)
 {
     currentProjectIndex = projectIndex;
     currentImageIndex = imageIndex;
@@ -90,12 +90,12 @@ function openModal(projectIndex, imageIndex)
     modal.classList.add('active');
 }
 
-function closeModal()
+function CloseModal()
 {
     document.getElementById('modal').classList.remove('active');
 }
 
-function changeImage(direction, event)
+function ChangeImage(direction, event)
 {
     if( event )
         event.stopPropagation();

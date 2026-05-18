@@ -6,11 +6,11 @@
 
     <div id="gallery-container"></div>
 
-    <div id="modal" class="modal" onclick="closeModal()">
-        <span class="modal-close" onclick="closeModal()">&times;</span>
+    <div id="modal" class="modal" onclick="CloseModal()">
+        <span class="modal-close" onclick="CloseModal()">&times;</span>
 
-        <a class="modal-nav prev" onclick="changeImage(-1, event)">&#10094;</a>
-        <a class="modal-nav next" onclick="changeImage(1, event)">&#10095;</a>
+        <a class="modal-nav prev" onclick="ChangeImage(-1, event)">&#10094;</a>
+        <a class="modal-nav next" onclick="ChangeImage(1, event)">&#10095;</a>
         
         <img id="modal-image" class="modal-image" onclick="event.stopPropagation()">
     </div>
