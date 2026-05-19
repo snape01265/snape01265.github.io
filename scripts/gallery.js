@@ -70,7 +70,7 @@ function RenderGallery()
         for( let j = 0; j < project.images.length; j++ )
         {
             const imagePath = project.images[j];
-            html += `<img src="${imagePath}" class="gallery-thumbnail" onclick="openModal(${i}, ${j})">`;
+            html += `<img src="${imagePath}" class="gallery-thumbnail" onclick="OpenModal(${i}, ${j})">`;
         }
         html += `</div></div>`;
     }

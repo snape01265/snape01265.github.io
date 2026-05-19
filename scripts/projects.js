@@ -24,7 +24,26 @@ const projectData = {
                     "Date" : "2023.05 - 2026.03",
                     "Engine" : "Unity",
                     "Team Size" : "30+",
-                }
+                },
+            linksTitle : "Links & Code",
+            linksContent : `
+                <div class="icon-link-container">
+                    <a href="https://store.steampowered.com/app/2102040/My_Little_Puppy/" target="_blank" class="icon-link">
+                        <svg class="social-icon" fill="currentColor">
+                            <use href="#icon-steam"></use>
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=IHHLVARFvNQ" target="_blank" class="icon-link">
+                        <svg class="social-icon" fill="currentColor">
+                            <use href="#icon-youtube"></use>
+                        </svg>
+                    </a>
+                </div>
+                <a href="javascript:void(0);" class="button" onclick="OpenCodeModal('assets/projects/my-little-puppy/BaristaGraph.cs')">Code Sample 1</a>
+                <a href="javascript:void(0);" class="button" onclick="OpenCodeModal('assets/projects/my-little-puppy/MovePathEditor2.cs')">Code Sample 2</a>
+                <a href="javascript:void(0);" class="button" onclick="OpenCodeModal('assets/projects/my-little-puppy/SailMode.cs')">Code Sample 3</a>
+                <a href="javascript:void(0);" class="button" onclick="OpenCodeModal('assets/projects/my-little-puppy/OmniKey.cs')">Code Sample 4</a>
+            `
         },
     "space-haste" :
         {
@@ -36,7 +55,22 @@ const projectData = {
                     "Date" : "2023.03 - 2023.03",
                     "Engine" : "Unity",
                     "Team Size" : "4",
-                }
+                },
+            linksTitle : "Links",
+            linksContent : `
+                <div class="icon-link-container">
+                    <a href="https://www.youtube.com/watch?v=hVrAXYSy0VY" target="_blank" class="icon-link">
+                        <svg class="social-icon" fill="currentColor">
+                            <use href="#icon-youtube"></use>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/snape01265/Space-haste.git" target="_blank" class="icon-link">
+                        <svg class="social-icon" fill="currentColor">
+                            <use href="#icon-github"></use>
+                        </svg>
+                    </a>
+                </div>
+            `
         },
     "soul-after" :
         {
@@ -48,7 +82,22 @@ const projectData = {
                     "Date" : "2021.08 - 2022.08",
                     "Engine" : "Unity",
                     "Team Size" : "6",
-                }
+                },
+            linksTitle : "Links",
+            linksContent : `
+                <div class="icon-link-container">
+                    <a href="https://store.steampowered.com/app/2148220/Soul_After/" target="_blank" class="icon-link">
+                        <svg class="social-icon" fill="currentColor">
+                            <use href="#icon-steam"></use>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/snape01265/Soul-after.git" target="_blank" class="icon-link">
+                        <svg class="social-icon" fill="currentColor">
+                            <use href="#icon-github"></use>
+                        </svg>
+                    </a>
+                </div>
+            `
         },
 };
 
@@ -61,6 +110,49 @@ async function SwitchProject(projectId)
     if( data === undefined )
         return;
 
+    let htmlInfo = GetInfoData(data);
+    let htmlDescription = await GetProjectData(projectId);
+    let htmlLinks = GetLinksData(data);
+
+    display.innerHTML = `
+        <h2 class="project-title">${data.title}</h2>
+        <div class="project-header-container">
+            <div class="project-about-block">
+                <h3>About</h3>
+                ${data.about}
+            </div>
+            <div class="project-right-column">
+                <div class="project-info-block">
+                    ${htmlInfo}
+                </div>
+                ${htmlLinks}
+            </div>
+        </div>
+        <div class="project-desc">${htmlDescription}</div>
+    `;
+
+    divider.classList.remove('hidden');
+    display.classList.remove('active-project');
+
+    setTimeout(function() {
+        display.classList.add('active-project');
+    }, 10);
+
+    const thumbnails = document.querySelectorAll('.project-thumb');
+    for( let i = 0; i < thumbnails.length; i++ )
+    {
+        thumbnails[i].classList.remove('active-project');
+    }
+
+    const activeThumbnail = document.querySelector(`.project-thumb[onclick="SwitchProject('${projectId}')"]`);
+    if( activeThumbnail )
+    {
+        activeThumbnail.classList.add('active-project');
+    }
+}
+
+function GetInfoData(data)
+{
     let htmlInfo = "";
 
     if( data.info )
@@ -78,6 +170,11 @@ async function SwitchProject(projectId)
         }
     }
 
+    return htmlInfo;
+}
+
+async function GetProjectData(projectId)
+{
     let htmlDescription = "";
     try
     {
@@ -98,38 +195,24 @@ async function SwitchProject(projectId)
         htmlDescription = `<p>Error loading project description.</p>`;
     }
 
-    display.innerHTML = `
-        <h2 class="project-title">${data.title}</h2>
-        <div class="project-header-container">
-            <div class="project-about-block">
-                <h3>About</h3>
-                ${data.about}
-            </div>
-            <div class="project-info-block">
-                ${htmlInfo}
-            </div>
-        </div>
-        <div class="project-desc">${htmlDescription}</div>
-    `;
+    return htmlDescription;
+}
 
-    divider.classList.remove('hidden');
-    display.classList.remove('active-project');
+function GetLinksData(data)
+{
+    let htmlLinks = "";
 
-    setTimeout(function() {
-        display.classList.add('active-project');
-    }, 10);
-
-    const thumbnails = document.querySelectorAll('.project-thumb');
-    for( let i = 0; i < thumbnails.length; i++ )
+    if( data.linksTitle && data.linksContent )
     {
-        thumbnails[i].classList.remove('active-project');
+        htmlLinks = `
+            <div class="project-extra-block">
+                <h3>${data.linksTitle}</h3>
+                ${data.linksContent}
+            </div>
+        `;
     }
 
-    const activeThumbnail = document.querySelector(`.project-thumb[onclick="switchProject('${projectId}')"]`);
-    if( activeThumbnail )
-    {
-        activeThumbnail.classList.add('active-project');
-    }
+    return htmlLinks;
 }
 
 async function OpenCodeModal(filePath)

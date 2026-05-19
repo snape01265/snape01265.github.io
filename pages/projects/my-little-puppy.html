@@ -31,7 +31,6 @@
     <li>Implement in-game and out-game UI with art and design departments for gameplay systems and menu</li>
     <li>Implement cross-platform input manager</li>
     <li>Collaborate with outsourced sound designers to implement audio solutions</li>
-    <li>A lot of refactoring, debugging, and polishing</li>
 </list>
 <br>
 <h3>Tools & Engine</h3>
@@ -42,16 +41,61 @@
     <li>Art asset management/search tool</li>
 </list>
 <br>
+<h3>Memorable Things from Development</h3>
+<h4>Barista System</h4>
+<p>Early in the project, every narrative sequence was hard-coded, 
+    including repetitive tasks like triggering animations at certain timings. 
+    But as the project progressed, we realized that these tasks were becoming 
+    bottlenecks for the sequences that the designers had envisioned.</p>
+<p>Instead of programmers trying to figure out the details for that scene's 
+    narrative sequences, I built a system and an editor tool that gave designers 
+    (and everybody else) a way to author events themselves. This drastically 
+    sped up our creative process, enabling all members to test and iterate on multiple 
+    ideas without waiting on a programmer. (AKA me)</p>
+<p>What started as a simple tool for narrative sequences quickly scaled into the core 
+    of our game's logic. We expanded Barista for use in cutscenes, trigger events, 
+    checkpoint progression, and more. Ultimately, it became an essential tool that 
+    enabled most scripted events in MLP, streamlining our entire development process.</p>
+<figure class="desc-figure">
+    <video src="assets/projects/my-little-puppy/video01.mp4" autoplay muted loop playsinline></video>
+    <figcaption>Barista Graph Editor Tool</figcaption>
+</figure>
 
-<h3>Here are some examples of code I wrote</h3>
-<a href="javascript:void(0);" class="inline-link" onclick="OpenCodeModal('assets/projects/my-little-puppy/BaristaGraph.cs')">BaristaGraph.cs</a>
-<br>
-<a href="javascript:void(0);" class="inline-link" onclick="OpenCodeModal('assets/projects/my-little-puppy/MovePathEditor2.cs')">MovePathEditor2.cs</a>
-<br>
-<a href="javascript:void(0);" class="inline-link" onclick="OpenCodeModal('assets/projects/my-little-puppy/SailMode.cs')">SailMode.cs</a>
-<br>
-<a href="javascript:void(0);" class="inline-link" onclick="OpenCodeModal('assets/projects/my-little-puppy/BaristaAction_TextUI.cs')">BaristaAction_TextUI.cs</a>
-<br>
-<a href="javascript:void(0);" class="inline-link" onclick="OpenCodeModal('assets/projects/my-little-puppy/TriggerAction_HighJumpWeb.cs')">TriggerAction_HighJumpWeb.cs</a>
-<br>
-<a href="javascript:void(0);" class="inline-link" onclick="OpenCodeModal('assets/projects/my-little-puppy/OmniKey.cs')">OmniKey.cs</a>
+<h4>Cross-Platform Input System</h4>
+<p>To support MLP's release across PC, PS5, and Nintendo Switch, I implemented an 
+    abstraction layer over Unity's Input System.</p>
+<p>The OmniInput class handles real-time device switching and key/pad remapping. 
+    It features a dynamic sprite mapper that translates raw inputs into platform-specific 
+    key sprites. This ensured console compliance and allowed designers to write text in Baristas 
+    without worrying about the active hardware. All the UIs (in-game, menu, settings, etc...) 
+    would be affected by this system.</p>
+<figure class="desc-figure">
+    <video src="assets/projects/my-little-puppy/video02.mp4" autoplay muted loop playsinline></video>
+    <figcaption>Keyboard & Mouse -> Controller example</figcaption>
+</figure>
+
+<h4>Porting & Optimization</h4>
+<p>Bringing MLP to the Nintendo Switch, PS5, and LG TV introduced me and my fellow porting team 
+    member to strict hardware constraints that required aggressive optimization. No but really, 
+    why is the Switch so low in memory and specs... I have gained a lot of respect for all 
+    console games. Older games on consoles were really using black magics to run the game so 
+    seamlessly.</p>
+<p>For the Nintendo Switch, I created a profiling system and helped optimizing the base game, 
+    ensuring we maintained a stable framerate without sacrificing the game's visual aesthetic.
+    (or I tried my best to keep it) This was a great opportunity for me to learn all kinds of 
+    optimization techniques. For PS5, optimization was not an issue, but the TRC was a hassle 
+    to meet.</p>
+<figure class="desc-figure">
+    <img src="assets/projects/my-little-puppy/example01.jpg" alt="FPS graph" class="desc-image"></img>
+    <figcaption>FPS graph on Switch generated through code & profiling</figcaption>
+</figure>
+<p>Beyond raw performance, translating the game to console required tweaking values to improve 
+    player experience. We rebalanced the difficulty of mini-games, overhauled the input handling 
+    to smooth out the roughness of the controls, and added additional mechanics to assist 
+    platforming. The goal was to ensure the dog's movement and platforming feel natural 
+    and responsive on a thumbstick, providing a good experience across all devices.</p>
+<p>The difference in platforms caused a lot of issues in the game, so naturally quick cycle of 
+    testing and fixing was crucial. I utilized CI tools, including Jenkins, NintendoSDK, 
+    and PS5SDK, to automate our deployment processes. This allowed the team to run fast, 
+    on-device iterations and test sessions, helping catch TRC violations and bugs more conveniently.
+    This automated process increased our overall development speed.</p>

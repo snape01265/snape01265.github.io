@@ -163,7 +163,7 @@ function HandleQueryParams(queryString, hash)
     if( hash === '/projects' )
     {
         const projectId = params.get('project');
-        window.switchProject(projectId);
+        window.SwitchProject(projectId);
     }
 }
 
