@@ -149,6 +149,12 @@ async function SwitchProject(projectId)
     {
         activeThumbnail.classList.add('active-project');
     }
+
+    const newHash = '#/projects?project=' + projectId;
+    if( window.location.hash !== newHash )
+    {
+        history.pushState(null, '', newHash);
+    }
 }
 
 function GetInfoData(data)

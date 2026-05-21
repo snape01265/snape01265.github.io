@@ -572,8 +572,8 @@ namespace Puppy
 	public class OmniSpriteMapper : IDatayard
 	{
 		static InputSettings mSettings;
-		static bool mIsGamepad;
 		static GamepadType mGamepadType = GamepadType.None;
+		static bool mIsGamepad;
 		static bool mDeviceChangeRegistered;
 
 		public OmniSpriteMapper(InputSettings settings)
