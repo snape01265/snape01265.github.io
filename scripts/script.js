@@ -167,6 +167,20 @@ function HandleQueryParams(queryString, hash)
     }
 }
 
+function CloseModalKey()
+{
+    if( event.key === 'Escape' )
+    {
+        const activeModals = document.querySelectorAll('.modal.active');
+
+        for( let i = 0; i < activeModals.length; i++ )
+        {
+            activeModals[i].classList.remove('active');
+        }
+    }
+}
+
 window.SwitchTab = SwitchTab;
 window.addEventListener('hashchange', Router);
 window.addEventListener('load', Router);
+document.addEventListener('keydown', CloseModalKey);
