@@ -12,24 +12,16 @@ function GetNestedTranslation(obj, path)
     return path.split('.').reduce((acc, part) => acc && acc[part], obj);
 }
 
-async function LoadLanguage(lang)
+function LoadLanguage(language)
 {
-    try
-    {
-        const response = await fetch(`locales/${lang}.json`);
-        translations = await response.json();
+    translations = locales[language];
 
-        currentLanguage = lang;
-        localStorage.setItem('language', lang);
+    currentLanguage = language;
+    localStorage.setItem('language', language);
 
-        TranslatePage();
+    TranslatePage();
 
-        window.dispatchEvent(new Event('languageChanged'));
-    }
-    catch( error )
-    {
-        console.error("Failed to load language:", error);
-    }
+    window.dispatchEvent(new Event('languageChanged'));
 }
 
 function TranslatePage()
@@ -46,3 +38,13 @@ function TranslatePage()
         }
     });
 }
+
+function ChangeLanguage(language)
+{
+    if( language != currentLanguage )
+    {
+        LoadLanguage(language);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => { LoadLanguage(currentLanguage); });

@@ -115,11 +115,11 @@ async function SwitchProject(projectId)
     let htmlLinks = GetLinksData(data);
 
     display.innerHTML = `
-        <h2 class="project-title">${data.title}</h2>
+        <h2 class="project-title" data-l10n="projects_list.${projectId}_title"></h2>
         <div class="project-header-container">
             <div class="project-about-block">
-                <h3>About</h3>
-                ${data.about}
+                <h3 data-l10n="project_details.about"></h3>
+                <div data-l10n="projects_list.${projectId}_about"></div>
             </div>
             <div class="project-right-column">
                 <div class="project-info-block">
@@ -131,6 +131,7 @@ async function SwitchProject(projectId)
         <div class="project-desc">${htmlDescription}</div>
     `;
 
+    TranslatePage();
     divider.classList.remove('hidden');
     display.classList.remove('active-project');
 

@@ -66,6 +66,7 @@ async function LoadPage(appRoot, routePath)
         const html = await response.text();
 
         appRoot.innerHTML = html;
+        if (typeof TranslatePage === 'function') TranslatePage();
 
         if( routePath === 'pages/gallery.html' )
         {

@@ -105,6 +105,18 @@ h1, h2, h3, h4, h5, h6
     color: var(--accent-color);
 }
 
+.language-toggle 
+{
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    gap: 15px;
+    z-index: 1000;
+}
+
 .inline-link
 {
     color: var(--text-main);
