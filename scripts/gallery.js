@@ -4,7 +4,7 @@
 
 const galleryData = [
     {
-        projectTitle : "My Little Puppy",
+        projectId : "my-little-puppy",
         images : [
             "assets/gallery/my-little-puppy/01.jpg",
             "assets/gallery/my-little-puppy/02.jpg",
@@ -25,7 +25,7 @@ const galleryData = [
         ]
     },
     {
-        projectTitle : "Soul After",
+        projectId : "soul-after",
         images : [
             "assets/gallery/soul-after/01.jpg",
             "assets/gallery/soul-after/02.jpg",
@@ -63,7 +63,7 @@ function RenderGallery()
         const project = galleryData[i];
 
         html += `<div class="gallery-block">
-                    <h3 class="gallery-title">${project.projectTitle}</h3>
+                    <h3 class="gallery-title" data-l10n="projects_list.${project.projectId}_title"></h3>
                     <div class="gallery-grid">
                 `;
 
@@ -76,6 +76,7 @@ function RenderGallery()
     }
 
     container.innerHTML = html;
+    if (typeof TranslatePage === 'function') TranslatePage();
 }
 
 function OpenModal(projectIndex, imageIndex)

@@ -18,6 +18,7 @@ function LoadLanguage(language)
 
     currentLanguage = language;
     localStorage.setItem('language', language);
+    document.documentElement.lang = language;
 
     TranslatePage();
 
