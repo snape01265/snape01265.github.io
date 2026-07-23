@@ -36,7 +36,8 @@ const projectData = {
                 <a href="javascript:void(0);" class="button" onclick="OpenCodeModal('assets/projects/my-little-puppy/BaristaGraph.cs')">Code Sample 1</a>
                 <a href="javascript:void(0);" class="button" onclick="OpenCodeModal('assets/projects/my-little-puppy/BaristaGraphView.cs')">Code Sample 2</a>
                 <a href="javascript:void(0);" class="button" onclick="OpenCodeModal('assets/projects/my-little-puppy/MovePathEditor2.cs')">Code Sample 3</a>
-                <a href="javascript:void(0);" class="button" onclick="OpenCodeModal('assets/projects/my-little-puppy/OmniKey.cs')">Code Sample 4</a>            `
+                <a href="javascript:void(0);" class="button" onclick="OpenCodeModal('assets/projects/my-little-puppy/OmniKey.cs')">Code Sample 4</a>
+            `
         },
     "space-haste" :
         {
