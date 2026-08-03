@@ -17,7 +17,7 @@ const locales = {
                 {
                     "backstory_title" : "Backstory",
                     "p1" : "Hello! If you have stumbled onto this page, I figure I owe you a proper introduction.",
-                    "p2" : "I'm Sunwoo Lee, I make games for a living. I find joy and fulfillment in the journey of creating games. I grew up playing all kinds of games — RPGs, platformers, strategy, party, shooters, etc — and still am an avid gamer. Although Steam is not the only platform for gaming, if you are interested in my gaming profile, you can find me ",
+                    "p2" : "I'm Sunwoo Lee, I make games for a living. I find joy and fulfillment in the journey of creating games. I grew up playing all kinds of games — RPGs, platformers, strategy, party, shooters, etc — and still am an avid gamer. If you are interested in my gaming history, you can find me ",
                     "p2_link" : "here",
                     "p3" : "While I was going through my military service, I had an abundance of time to meditate and think about life since I had no phones or computers in my vicinity to distract me. I regularly meditated and reflected upon my past to analyze what I truly value in life. Since then, I stopped seeing games as just entertainment and started appreciating them for what they really are: a unique blend of storytelling, visuals, music, and interactivity that no other medium can pull off quite the same way. Naturally, I wanted to create such experiences myself.",
                     "p4" : "Fast-forward to today, and I have a few years of professional experience under my belt, working across gameplay, tools, UI, animation, and more. I've put this website together to show what I've been up to — and to see where the road takes me next. Feel free to poke around!",
@@ -197,8 +197,8 @@ const locales = {
                 {
                     "backstory_title" : "배경",
                     "p1" : "안녕하세요! 이 페이지에 오셨으니, 제 소개를 제대로 하는 것이 맞겠죠.",
-                    "p2" : "저는 게임 프로그래머 이선우입니다. 게임을 만드는 과정에서 큰 기쁨과 성취감을 느낍니다. 어릴 적부터 RPG, 플랫포머, 전략, 파티, 슈팅 등 온갖 게임을 플레이하며 자랐고, 여전히 게이머입니다. 스팀이 유일한 플랫폼은 아니지만, 제 게임 프로필이 궁금하시다면: ",
-                    "p2_link" : "스팀 프로필",
+                    "p2" : "저는 게임 프로그래머 이선우입니다. 게임을 만드는 과정에서 큰 기쁨과 성취감을 느낍니다. 어릴 적부터 RPG, 플랫포머, 전략, 파티, 슈팅 등 온갖 게임을 플레이하며 자랐고, 여전히 게이머입니다. 제 게임 히스토리가 궁금하시다면: ",
+                    "p2_link" : "게임 히스토리",
                     "p3" : "군 복무 시절, 전화기나 컴퓨터 같은 방해물(?)이 없어 명상하고 삶에 대해 생각할 시간이 아주 많았습니다. 그 시절 꾸준히 명상하며 제 과거를 돌아보고 인생에서 진정으로 가치 있게 여기는 것이 무엇인지 고민했습니다. 그때부터 게임을 단순한 오락거리로 보지 않고, 스토리텔링, 비주얼, 음악, 상호작용이 어우러진 예술 작품으로 진정으로 이해하고 즐기게 되었습니다. 자연스럽게 저도 그런 경험을 직접 만들고 싶어졌구요.",
                     "p4" : "현재 저는 게임플레이, 툴, UI, 애니메이션 등 다양한 분야에서 실무 경험을 쌓았습니다. 이 웹사이트는 그동안 제가 해온 일들을 보여드리고, 앞으로 제 여정이 어디로 향할지 확인하기 위해 만들었습니다. 편하게 구경해 주세요!",
                     "skills_title" : "보유 기술",
